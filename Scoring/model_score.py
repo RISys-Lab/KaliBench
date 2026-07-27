@@ -11,7 +11,6 @@ python model_score.py --vllm_file ".\unres_llama_8b-out.jsonl" --label_file ".\l
 """
 #!/usr/bin/env python3
 # score_cmd_strict.py
-# 严格保持原始实现行为，但增加命令行接口
 
 import json
 import re
@@ -38,7 +37,6 @@ def parse_optional_args(raw):
         - list
         - string containing JSON
         - empty or null
-    (严格按你原代码逻辑)
     """
     # None or empty ⇒ return empty dict
     if raw is None:
@@ -339,7 +337,7 @@ def score_batch(vllm_file, label_file, out_file="scores.jsonl"):
     return summary
 
 # -------------------------
-# CLI wrapper (保持原有行为)
+# CLI wrapper 
 # -------------------------
 def build_arg_parser():
     p = argparse.ArgumentParser(description="Strict scoring (behavior matches original code).")
