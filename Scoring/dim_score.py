@@ -5,7 +5,7 @@ r"""
 kali-tool dimensional scoring pipeline — Method B normalization (per-dimension support)
 
 Usage example (PowerShell):
-python .\dim_score.py --models-folder ".\folder_that_stores_scoring_file" --output-folder ".\dim_score" --use-hf --hf-dataset "RISys-Lab/kali-tools"
+python .\dim_score.py --models-folder ".\folder_that_stores_scoring_file" --output-folder ".\dim_score" --use-hf --hf-dataset "anonymous62567/kali-tools"
 """
 
 import os
@@ -36,8 +36,8 @@ def parse_args():
                    help="Folder to write outputs to", required=True)
     p.add_argument("--use-hf", action="store_true",
                    help="Attempt to load HF dataset mapping (requires `datasets` lib and internet)")
-    p.add_argument("--hf-dataset", type=str, default="RISys-Lab/kali-tools",
-                   help="HF dataset id to load for title->metapackages mapping (default: RISys-Lab/kali-tools)")
+    p.add_argument("--hf-dataset", type=str, default="anonymous62567/kali-tools",
+                   help="HF dataset id to load for title->metapackages mapping (default: anonymous62567/kali-tools)")
     p.add_argument("--labels-file", type=str, default=None,
                    help="Optional path to a JSON or newline file with labels list; if omitted use embedded LABELS")
     p.add_argument("--no-tqdm", action="store_true", help="Disable tqdm progressbars")
