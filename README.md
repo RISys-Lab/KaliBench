@@ -13,7 +13,7 @@
   📄 Paper: arXiv coming soon
 </p>
 
-**Official repository for "KaliBench: A Fine-Grained Benchmark for Cybersecurity Tool Use on Kali Linux with Runtime-Free Verifiable Rewards" (NeurIPS 2026 Evaluations and Datasets Track).**
+**Official repository for "KaliBench: A Fine-Grained Benchmark for Cybersecurity Tool Use on Kali Linux with Runtime-Free Verifiable Rewards" (NeurIPS 2026).**
 
 **Authors:** Pengfei Li<sup>1,∗</sup>, Naufal Suryanto<sup>1,∗</sup>, Sicheng Zhang<sup>1</sup>, Muzammal Naseer<sup>1,2</sup>
 
