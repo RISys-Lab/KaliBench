@@ -221,3 +221,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Paper drafts are private references; link to the public arXiv version instead.
+/assets/KaliBench*.pdf
+/pages/assets/KaliBench*.pdf

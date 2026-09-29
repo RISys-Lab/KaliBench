@@ -1,0 +1,508 @@
+{
+  "phases": [
+    {
+      "id": "1",
+      "label": "Reconnaissance & Initial Access",
+      "short_label": "Reconnaissance & access"
+    },
+    {
+      "id": "2",
+      "label": "Vulnerability Analysis",
+      "short_label": "Vulnerability analysis"
+    },
+    {
+      "id": "3",
+      "label": "Exploitation & Payload Delivery",
+      "short_label": "Exploitation & delivery"
+    },
+    {
+      "id": "4",
+      "label": "Post-Exploitation & Lateral Movement",
+      "short_label": "Post-exploitation"
+    },
+    {
+      "id": "5",
+      "label": "Defensive Analysis & Reporting",
+      "short_label": "Defense & reporting"
+    }
+  ],
+  "examples": [
+    {
+      "dimension": "information-gathering",
+      "dimension_label": "Information gathering",
+      "split": "test",
+      "custom_id": "sample_8052",
+      "phase": "1",
+      "selection_note": "The PDF tool/command has no released row. Nmap replacement is a representative information-gathering example.",
+      "taxonomy_evidence": {
+        "package": "nmap",
+        "dimension_label": "kali-tools-information-gathering",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 2531,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 871,
+        "all_package_dimensions": [
+          "kali-tools-exploitation",
+          "kali-tools-information-gathering",
+          "kali-tools-post-exploitation",
+          "kali-tools-reverse-engineering",
+          "kali-tools-social-engineering",
+          "kali-tools-voip",
+          "kali-tools-vulnerability",
+          "kali-tools-web"
+        ]
+      }
+    },
+    {
+      "dimension": "802-11",
+      "dimension_label": "802.11 wireless",
+      "split": "test",
+      "custom_id": "sample_6372",
+      "phase": "1",
+      "selection_note": "Exact PDF query/command retained from released test data; aliases are copied from JSONL.",
+      "taxonomy_evidence": {
+        "package": "util-linux",
+        "dimension_label": "kali-tools-802-11",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 2098,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 774,
+        "all_package_dimensions": [
+          "kali-tools-802-11",
+          "kali-tools-bluetooth",
+          "kali-tools-database",
+          "kali-tools-exploitation",
+          "kali-tools-forensics",
+          "kali-tools-fuzzing",
+          "kali-tools-hardware",
+          "kali-tools-information-gathering",
+          "kali-tools-passwords",
+          "kali-tools-post-exploitation",
+          "kali-tools-reporting",
+          "kali-tools-reverse-engineering",
+          "kali-tools-rfid",
+          "kali-tools-sdr",
+          "kali-tools-sniffing-spoofing",
+          "kali-tools-social-engineering",
+          "kali-tools-voip",
+          "kali-tools-vulnerability",
+          "kali-tools-web",
+          "kali-tools-windows-resources",
+          "kali-tools-wireless"
+        ]
+      }
+    },
+    {
+      "dimension": "rfid",
+      "dimension_label": "RFID",
+      "split": "test",
+      "custom_id": "sample_1120",
+      "phase": "1",
+      "selection_note": "PDF --cmd hf search is absent; bundled usage supports --command|-c, not --cmd. Use an exact released Proxmark3 command.",
+      "taxonomy_evidence": {
+        "package": "proxmark3",
+        "dimension_label": "kali-tools-rfid",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 311,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 598,
+        "all_package_dimensions": ["kali-tools-rfid", "kali-tools-wireless"]
+      }
+    },
+    {
+      "dimension": "bluetooth",
+      "dimension_label": "Bluetooth",
+      "split": "test",
+      "custom_id": "sample_4205",
+      "phase": "1",
+      "selection_note": "No bluetoothctl row exists in released splits. hcitool scan is a released nearby-device scanning example.",
+      "taxonomy_evidence": {
+        "package": "bluez",
+        "dimension_label": "kali-tools-bluetooth",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1356,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 506,
+        "all_package_dimensions": [
+          "kali-tools-bluetooth",
+          "kali-tools-rfid",
+          "kali-tools-wireless"
+        ]
+      }
+    },
+    {
+      "dimension": "sdr",
+      "dimension_label": "Software-defined radio",
+      "split": "test",
+      "custom_id": "sample_919",
+      "phase": "1",
+      "selection_note": "No rtlsdr-scanner row exists in released splits. hackrf_transfer provides a documented radio capture example.",
+      "taxonomy_evidence": {
+        "package": "hackrf",
+        "dimension_label": "kali-tools-sdr",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1410,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 514,
+        "all_package_dimensions": ["kali-tools-sdr", "kali-tools-wireless"]
+      }
+    },
+    {
+      "dimension": "social-engineering",
+      "dimension_label": "Social engineering",
+      "split": "test",
+      "custom_id": "sample_420",
+      "phase": "1",
+      "selection_note": "No airbase-ng row exists in released splits. setoolkit starts the dedicated Social-Engineer Toolkit; empty optional and positional annotations are authentic.",
+      "taxonomy_evidence": {
+        "package": "set",
+        "dimension_label": "kali-tools-social-engineering",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 698,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 250,
+        "all_package_dimensions": [
+          "kali-tools-exploitation",
+          "kali-tools-social-engineering"
+        ]
+      }
+    },
+    {
+      "dimension": "vulnerability",
+      "dimension_label": "Vulnerability analysis",
+      "split": "test",
+      "custom_id": "sample_1112",
+      "phase": "2",
+      "selection_note": "PDF and released sample_6152 request all plugins but --enumerate p means popular plugins in bundled WPScan usage (ap means all). Select exact released nuclei sample_1112 instead. Also avoid nikto sample_572 as its double-dash option spellings differ from bundled documentation and its recorded output reports zero hosts tested; not independently established as a valid execution.",
+      "taxonomy_evidence": {
+        "package": "nuclei",
+        "dimension_label": "kali-tools-vulnerability",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 310,
+        "metapackage_evidence_url": "https://www.kali.org/tools/nuclei/",
+        "metapackage_evidence_observed": "2026-09-29",
+        "all_package_dimensions": [
+          "kali-tools-information-gathering",
+          "kali-tools-vulnerability"
+        ],
+        "note": "The local scoring example CSV leaves nuclei metadata empty. Official Kali tool page directly lists vulnerability and information-gathering under Tools metapackages."
+      }
+    },
+    {
+      "dimension": "fuzzing",
+      "dimension_label": "Fuzzing",
+      "split": "test",
+      "custom_id": "sample_7447",
+      "phase": "2",
+      "selection_note": "Exact PDF example retained; --test-arg value contains a quoted space and an option-looking token, and must remain one value.",
+      "taxonomy_evidence": {
+        "package": "llvm-defaults",
+        "dimension_label": "kali-tools-fuzzing",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 2333,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 895,
+        "all_package_dimensions": [
+          "kali-tools-fuzzing",
+          "kali-tools-reverse-engineering",
+          "kali-tools-vulnerability"
+        ]
+      }
+    },
+    {
+      "dimension": "web",
+      "dimension_label": "Web analysis",
+      "split": "test",
+      "custom_id": "sample_7035",
+      "phase": "2",
+      "selection_note": "PDF uses --verbose once for maximum verbosity; corresponding released sample_7033 uses it twice but optional_args has one null entry. Choose another exact released WAF example to avoid duplicate-count ambiguity.",
+      "taxonomy_evidence": {
+        "package": "wafw00f",
+        "dimension_label": "kali-tools-web",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 2238,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 3306,
+        "all_package_dimensions": [
+          "kali-tools-information-gathering",
+          "kali-tools-vulnerability",
+          "kali-tools-web"
+        ]
+      }
+    },
+    {
+      "dimension": "database",
+      "dimension_label": "Database analysis",
+      "split": "test",
+      "custom_id": "sample_5864",
+      "phase": "2",
+      "selection_note": "The PDF sqlmap URL/query is absent from released splits. Use a released database-enumeration sample.",
+      "taxonomy_evidence": {
+        "package": "sqlmap",
+        "dimension_label": "kali-tools-database",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1887,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 2737,
+        "all_package_dimensions": [
+          "kali-tools-database",
+          "kali-tools-exploitation",
+          "kali-tools-information-gathering",
+          "kali-tools-vulnerability",
+          "kali-tools-web"
+        ]
+      }
+    },
+    {
+      "dimension": "voip",
+      "dimension_label": "VoIP",
+      "split": "test",
+      "custom_id": "sample_1147",
+      "phase": "2",
+      "selection_note": "No rtpinsertsound row exists in released splits. rtpbreak analyzes captured RTP traffic and has VoIP taxonomy evidence.",
+      "taxonomy_evidence": {
+        "package": "rtpbreak",
+        "dimension_label": "kali-tools-voip",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1561,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 607,
+        "all_package_dimensions": [
+          "kali-tools-voip",
+          "kali-tools-vulnerability"
+        ]
+      }
+    },
+    {
+      "dimension": "exploitation",
+      "dimension_label": "Exploitation",
+      "split": "test",
+      "custom_id": "sample_2211",
+      "phase": "3",
+      "selection_note": "The sheet duplicates vulnerability WPScan verbatim under exploitation. Local taxonomy lists WPScan information-gathering/vulnerability/web, not exploitation. Use Metasploit cyclic-pattern generation.",
+      "taxonomy_evidence": {
+        "package": "metasploit-framework",
+        "dimension_label": "kali-tools-exploitation",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 561,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 159,
+        "all_package_dimensions": [
+          "kali-tools-exploitation",
+          "kali-tools-information-gathering",
+          "kali-tools-post-exploitation",
+          "kali-tools-reverse-engineering",
+          "kali-tools-social-engineering",
+          "kali-tools-vulnerability",
+          "kali-tools-web"
+        ]
+      }
+    },
+    {
+      "dimension": "sniffing-spoofing",
+      "dimension_label": "Sniffing and spoofing",
+      "split": "test",
+      "custom_id": "sample_3344",
+      "phase": "3",
+      "selection_note": "Exact PDF query/command retained; this record has a runtime failure in the construction sandbox, so do not claim successful execution.",
+      "taxonomy_evidence": {
+        "package": "dsniff",
+        "dimension_label": "kali-tools-sniffing-spoofing",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1003,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 1585,
+        "all_package_dimensions": [
+          "kali-tools-exploitation",
+          "kali-tools-sniffing-spoofing",
+          "kali-tools-social-engineering",
+          "kali-tools-voip",
+          "kali-tools-vulnerability"
+        ]
+      }
+    },
+    {
+      "dimension": "hardware",
+      "dimension_label": "Hardware",
+      "split": "test",
+      "custom_id": "sample_3762",
+      "phase": "3",
+      "selection_note": "PDF 2-thread query exists as train sample_3765 with corrected -smp threads=2 rather than -smp 2; it also lacks a machine selection and its recorded runtime says no default machine. Choose the released explicit virt-machine example.",
+      "taxonomy_evidence": {
+        "package": "qemu",
+        "dimension_label": "kali-tools-hardware",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1156,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 423,
+        "all_package_dimensions": ["kali-tools-hardware"]
+      }
+    },
+    {
+      "dimension": "wireless",
+      "dimension_label": "Wireless",
+      "split": "test",
+      "custom_id": "sample_4038",
+      "phase": "3",
+      "selection_note": "Exact PDF query/command retained; construction log is a runtime permission failure, not successful device connection.",
+      "taxonomy_evidence": {
+        "package": "sakis3g",
+        "dimension_label": "kali-tools-wireless",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1301,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 1938,
+        "all_package_dimensions": ["kali-tools-wireless"]
+      }
+    },
+    {
+      "dimension": "post-exploitation",
+      "dimension_label": "Post-exploitation",
+      "split": "train",
+      "custom_id": "sample_4566",
+      "phase": "4",
+      "selection_note": "Ground-truth command matches the sheet, but released query begins In list mode. Preserve released wording and train provenance.",
+      "taxonomy_evidence": {
+        "package": "sudo",
+        "dimension_label": "kali-tools-post-exploitation",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1448,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 2127,
+        "all_package_dimensions": [
+          "kali-tools-post-exploitation",
+          "kali-tools-reporting",
+          "kali-tools-social-engineering",
+          "kali-tools-vulnerability"
+        ]
+      }
+    },
+    {
+      "dimension": "passwords",
+      "dimension_label": "Passwords",
+      "split": "test",
+      "custom_id": "sample_4684",
+      "phase": "4",
+      "selection_note": "Exact PDF query/command retained. Command uses attached -T5 while optional_args stores key -T and value 5; aliases/values must not be inferred from whitespace.",
+      "taxonomy_evidence": {
+        "package": "ncrack",
+        "dimension_label": "kali-tools-passwords",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1495,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 2173,
+        "all_package_dimensions": ["kali-tools-passwords", "kali-tools-web"]
+      }
+    },
+    {
+      "dimension": "windows-resources",
+      "dimension_label": "Windows resources",
+      "split": "test",
+      "custom_id": "sample_2257",
+      "phase": "4",
+      "selection_note": "No regripper row exists in released splits. DNSChef is a source-backed member of windows-resources. Avoid windows-binaries/windows-resources pseudo-command rows and dbd rows with unsupported invented long aliases.",
+      "taxonomy_evidence": {
+        "package": "dnschef",
+        "dimension_label": "kali-tools-windows-resources",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 584,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 1114,
+        "all_package_dimensions": [
+          "kali-tools-sniffing-spoofing",
+          "kali-tools-windows-resources"
+        ]
+      }
+    },
+    {
+      "dimension": "crypto-stego",
+      "dimension_label": "Cryptography and steganography",
+      "split": "test",
+      "custom_id": "sample_4077",
+      "phase": "4",
+      "dimension_short_label": "Crypto & steganography",
+      "selection_note": "PDF steghide extract operation is absent; released steghide only has encinfo. Select an exact ccrypt-package decryption example with crypto-stego taxonomy evidence.",
+      "taxonomy_evidence": {
+        "package": "ccrypt",
+        "dimension_label": "kali-tools-crypto-stego",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1315,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 1966,
+        "all_package_dimensions": ["kali-tools-crypto-stego"]
+      }
+    },
+    {
+      "dimension": "reverse-engineering",
+      "dimension_label": "Reverse engineering",
+      "split": "test",
+      "custom_id": "sample_3536",
+      "phase": "5",
+      "selection_note": "Exact PDF query/command retained with the released --force|-f and --output|-o alias groups.",
+      "taxonomy_evidence": {
+        "package": "dex2jar",
+        "dimension_label": "kali-tools-reverse-engineering",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1069,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 1686,
+        "all_package_dimensions": ["kali-tools-reverse-engineering"]
+      }
+    },
+    {
+      "dimension": "forensics",
+      "dimension_label": "Forensics",
+      "split": "test",
+      "custom_id": "sample_3642",
+      "phase": "5",
+      "selection_note": "PDF sample exists as train sample_3653 but asks to convert to Java while suppressing all source and resources. Select a clearer released jadx decompilation example rather than editing its wording.",
+      "taxonomy_evidence": {
+        "package": "jadx",
+        "dimension_label": "kali-tools-forensics",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1109,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 1710,
+        "all_package_dimensions": [
+          "kali-tools-forensics",
+          "kali-tools-reverse-engineering"
+        ]
+      }
+    },
+    {
+      "dimension": "reporting",
+      "dimension_label": "Reporting",
+      "split": "test",
+      "custom_id": "sample_3692",
+      "phase": "5",
+      "selection_note": "Exact PDF query/command retained; display unavailability is recorded in construction logs.",
+      "taxonomy_evidence": {
+        "package": "recordmydesktop",
+        "dimension_label": "kali-tools-reporting",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 1124,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 1735,
+        "all_package_dimensions": ["kali-tools-reporting"]
+      }
+    },
+    {
+      "dimension": "gpu",
+      "dimension_label": "GPU tools",
+      "split": "test",
+      "custom_id": "sample_8306",
+      "phase": "5",
+      "selection_note": "PDF SHA1 cracking command/flags are absent from the release. The only released oclgausscrack command is --help. Retain honestly; it illustrates tool/flag selection, not GPU cracking behavior.",
+      "taxonomy_evidence": {
+        "package": "oclgausscrack",
+        "dimension_label": "kali-tools-gpu",
+        "subtool_mapping_file": "KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl",
+        "subtool_mapping_line": 2645,
+        "metapackage_evidence_file": "Scoring/dim_score_example.csv",
+        "metapackage_evidence_line": 3967,
+        "all_package_dimensions": ["kali-tools-gpu", "kali-tools-passwords"]
+      }
+    }
+  ],
+  "curation_note": "The source sheet guided coverage. Queries, commands, and argument annotations come unchanged from the released splits. This is a dataset illustration, not model-output analysis."
+}

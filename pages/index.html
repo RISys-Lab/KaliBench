@@ -1,0 +1,2063 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f3" />
+    <title>KaliBench | NeurIPS 2026</title>
+    <meta
+      name="description"
+      content="From analyst intent to executable commands. KaliBench is a fine-grained benchmark for cybersecurity tool use: 8,504 verified pairs, 1,642 tools, and runtime-free verifiable rewards. NeurIPS 2026."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="KaliBench | NeurIPS 2026" />
+    <meta
+      property="og:description"
+      content="A fine-grained benchmark for cybersecurity tool use on Kali Linux with runtime-free verifiable rewards. NeurIPS 2026 Evaluations and Datasets Track."
+    />
+    <meta
+      property="og:image"
+      content="https://risys-lab.github.io/KaliBench/assets/social-card.png"
+    />
+    <meta property="og:url" content="https://risys-lab.github.io/KaliBench/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      property="og:image:alt"
+      content="KaliBench: a benchmark with 8,504 verified query–command pairs spanning 1,642 tools and 23 capability dimensions."
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <link rel="canonical" href="https://risys-lab.github.io/KaliBench/" />
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link
+      rel="preload"
+      href="assets/fonts/dm-sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer=""></script>
+    <script src="examples.js" defer=""></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a
+    ><svg
+      class="icon-library"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h14M13 6l6 6-6 6"></path>
+      </symbol>
+      <symbol id="icon-up-right" viewBox="0 0 24 24">
+        <path d="M6 18 18 6M6 6h12v12"></path>
+      </symbol>
+      <symbol id="icon-paper" viewBox="0 0 24 24">
+        <path d="M14 3H5v18h14V8l-5-5Z M14 3v5h5M8 12h8M8 16h6"></path>
+      </symbol>
+      <symbol id="icon-code" viewBox="0 0 24 24">
+        <path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"></path>
+      </symbol>
+      <symbol id="icon-data" viewBox="0 0 24 24">
+        <ellipse cx="12" cy="5" rx="8" ry="3"></ellipse>
+        <path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"></path>
+      </symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24">
+        <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+        <path d="M16 8V4H4v12h4"></path>
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m5 12 4 4L19 6"></path>
+      </symbol>
+      <symbol id="icon-github" viewBox="0 0 24 24">
+        <path
+          d="M9 19c-4.3 1.3-4.3-2.2-6-2.7M15 22v-3.9a3.4 3.4 0 0 0-.9-2.7c3-.3 6.1-1.5 6.1-6.9A5.4 5.4 0 0 0 18.7 5a5 5 0 0 0-.1-3.5s-1.2-.4-3.8 1.5a13.3 13.3 0 0 0-6.8 0C5.4 1.1 4.2 1.5 4.2 1.5A5 5 0 0 0 4.1 5a5.4 5.4 0 0 0-1.5 3.8c0 5.4 3.1 6.6 6.1 6.9a3.4 3.4 0 0 0-.9 2.7V22"
+        ></path>
+      </symbol>
+    </svg>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="wordmark" href="#main" aria-label="KaliBench home"
+          ><img src="assets/logo.png" width="83" height="46" alt="KaliBench"
+        /></a>
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="#benchmark">Benchmark</a><a href="#results">Results</a
+          ><a href="#method">Dataset</a><a href="#resources">Resources</a
+          ><a href="#citation">Cite</a>
+        </nav>
+        <a
+          class="nav-github"
+          aria-label="KaliBench on GitHub"
+          href="https://github.com/RISys-Lab/KaliBench"
+          ><svg class="icon" aria-hidden="true" focusable="false">
+            <use href="#icon-github"></use></svg
+          ><span>GitHub</span></a
+        ><button
+          class="menu-toggle"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span></span><span></span>
+        </button>
+      </div>
+      <nav
+        class="mobile-nav"
+        id="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden=""
+      >
+        <a href="#benchmark">Benchmark</a><a href="#results">Results</a
+        ><a href="#method">Dataset</a><a href="#resources">Resources</a
+        ><a href="#citation">Cite this work</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section
+        class="hero container"
+        id="overview"
+        aria-labelledby="hero-title"
+      >
+        <p class="conference-badge">
+          <strong>NeurIPS 2026</strong
+          ><span>Evaluations and Datasets Track</span>
+        </p>
+        <h1 id="hero-title">
+          <span class="title-name">KaliBench:</span> A Fine-Grained Benchmark
+          for Cybersecurity Tool Use on Kali Linux with Runtime-Free Verifiable
+          Rewards
+        </h1>
+        <div class="authors" aria-label="Paper authors">
+          <span>Pengfei Li<sup>1,∗</sup></span
+          ><span>Naufal Suryanto<sup>1,∗</sup></span
+          ><span>Sicheng Zhang<sup>1</sup></span
+          ><span>Muzammal Naseer<sup>1,2</sup></span>
+        </div>
+        <p class="affiliations">
+          <span><sup>1</sup> Khalifa University</span
+          ><span><sup>2</sup> University of Western Australia</span>
+          <span class="contribution-note"><sup>∗</sup> Equal contribution</span>
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-dark"
+            href="https://github.com/RISys-Lab/KaliBench"
+            ><svg class="icon" aria-hidden="true" focusable="false">
+              <use href="#icon-github"></use></svg
+            >Code</a
+          ><a
+            class="button button-outline"
+            href="https://huggingface.co/datasets/anonymous62567/KaliBench-Verified"
+            ><svg class="icon" aria-hidden="true" focusable="false">
+              <use href="#icon-data"></use></svg
+            >Dataset</a
+          >
+        </div>
+        <p class="paper-status">Paper: arXiv version coming soon.</p>
+      </section>
+      <div class="container">
+        <dl class="stats-strip" aria-label="Benchmark statistics">
+          <div>
+            <dd>8,504</dd>
+            <dt>Verified query–command pairs</dt>
+          </div>
+          <div>
+            <dd>1,642</dd>
+            <dt>Kali Linux tools</dt>
+          </div>
+          <div>
+            <dd>23</dd>
+            <dt>Capability dimensions</dt>
+          </div>
+          <div>
+            <dd>5</dd>
+            <dt>Security phases</dt>
+          </div>
+        </dl>
+      </div>
+      <section
+        class="section container intro-section"
+        id="benchmark"
+        aria-labelledby="benchmark-title"
+      >
+        <div class="section-heading">
+          <h2 id="benchmark-title">Benchmark overview</h2>
+          <p class="section-intro">
+            KaliBench separates tool selection from argument construction to
+            reveal where command generation fails.
+          </p>
+        </div>
+        <div class="intro-body">
+          <p>
+            KaliBench evaluates how well language models translate
+            natural-language cybersecurity requests into executable Kali Linux
+            commands. It isolates tool invocation from end-to-end agent
+            performance and measures errors at the level of individual command
+            components.
+          </p>
+          <p>
+            The dataset is grounded in official tool documentation, checked
+            through sandboxed execution and human review, and split into
+            <strong>3,504 training pairs</strong> and
+            <strong>5,000 evaluation pairs</strong>. The same deterministic
+            scoring provides verifiable rewards for training without executing
+            model-generated commands.
+          </p>
+          <details class="abstract-details">
+            <summary>
+              Read the abstract <span aria-hidden="true">+</span>
+            </summary>
+            <div>
+              <p>
+                LLMs are increasingly applied to cybersecurity workflows, where
+                they are expected to translate analysts’ intent into tool
+                invocations. However, existing evaluations focus on
+                knowledge-based assessments or end-to-end agentic tasks, and do
+                not directly measure LLMs’ ability to generate executable
+                commands for real-world cybersecurity tools. This gap is
+                critical because cybersecurity operations rely on strict
+                command-line interfaces (CLIs), where minor syntax errors,
+                incorrect flag–value bindings, or argument misordering can
+                invalidate execution.
+              </p>
+              <p>
+                We introduce KaliBench, a fine-grained benchmark and dataset for
+                natural-language–to–CLI translation on Kali Linux, comprising
+                8,504 query–command pairs spanning 1,642 tools across 23
+                capability dimensions and 5 security phases. KaliBench is
+                constructed via a manuscript-grounded pipeline with
+                deterministic canonicalization and alias-aware evaluation,
+                enabling precise and reproducible assessment of tool selection
+                and argument construction. To ensure both semantic correctness
+                and practical executability, we develop a multi-stage
+                verification pipeline that combines LLM-based validation,
+                sandboxed terminal execution, and human-in-the-loop refinement.
+              </p>
+              <p>
+                Building on these fine-grained, deterministic signals, KaliBench
+                further enables runtime-free verifiable rewards for training.
+                Across three evaluation modes and 24 configurations of
+                general-purpose and security-focused open-weight models, no
+                model exceeds 42% exact-command accuracy in the unrestricted
+                setting, highlighting the difficulty of accurate CLI-based
+                cybersecurity tool use without explicit tool hints. We further
+                show that supervised fine-tuning and reinforcement learning with
+                verifiable rewards derived from KaliBench significantly improve
+                an 8B model and achieve performance comparable to a 685B MoE
+                model.
+              </p>
+            </div>
+          </details>
+        </div>
+        <!-- BEGIN EXAMPLE EXPLORER -->
+        <figure
+          class="command-example"
+          id="examples"
+          aria-labelledby="example-title"
+        >
+          <figcaption>
+            <h3 id="example-title">Explore benchmark examples</h3>
+            <span>23 dimensions · 5 security phases</span>
+          </figcaption>
+          <div class="example-filters" data-example-enhanced hidden>
+            <div class="example-filter">
+              <label for="example-phase">Security phase</label
+              ><select id="example-phase">
+                <option value="1">1. Reconnaissance &amp; access</option>
+                <option value="2">2. Vulnerability analysis</option>
+                <option value="3">3. Exploitation &amp; delivery</option>
+                <option value="4">4. Post-exploitation</option>
+                <option value="5">5. Defense &amp; reporting</option>
+              </select>
+            </div>
+            <div class="example-filter">
+              <label for="example-dimension">Dimension</label
+              ><select id="example-dimension">
+                <option value="information-gathering">
+                  Information gathering
+                </option>
+                <option value="802-11">802.11 wireless</option>
+                <option value="rfid">RFID</option>
+                <option value="bluetooth">Bluetooth</option>
+                <option value="sdr">Software-defined radio</option>
+                <option value="social-engineering">Social engineering</option>
+              </select>
+            </div>
+            <div
+              class="example-pagination"
+              role="group"
+              aria-label="Browse benchmark examples"
+            >
+              <button
+                id="example-previous"
+                type="button"
+                aria-label="Previous example"
+                disabled
+              >
+                <svg class="icon previous-arrow" aria-hidden="true">
+                  <use href="#icon-arrow"></use>
+                </svg>
+              </button>
+              <span id="example-counter" aria-hidden="true">1 / 23</span>
+              <button id="example-next" type="button" aria-label="Next example">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-arrow"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="example-columns">
+            <div class="example-query">
+              <h3>Natural-language request</h3>
+              <blockquote id="example-query">
+                Scan host 192.168.1.100 using TCP Connect scan on ports 21
+                through 25 and 80, and display only open ports.
+              </blockquote>
+              <p class="example-provenance">
+                Released dataset example<br /><a
+                  id="example-source"
+                  href="https://github.com/RISys-Lab/KaliBench/blob/main/KaliBench_data/kalibench_verified_test_5000.jsonl"
+                  >Test split · sample_8052</a
+                >
+              </p>
+            </div>
+            <div class="example-command">
+              <h3>Ground-truth command</h3>
+              <div
+                class="anatomy-controls"
+                role="group"
+                aria-label="Explore command components"
+                data-example-enhanced
+                hidden
+              >
+                <button
+                  class="anatomy-button active"
+                  data-component="tool"
+                  aria-pressed="true"
+                >
+                  Tool
+                </button>
+                <button
+                  class="anatomy-button"
+                  data-component="keys"
+                  aria-pressed="false"
+                >
+                  Optional keys
+                </button>
+                <button
+                  class="anatomy-button"
+                  data-component="values"
+                  aria-pressed="false"
+                >
+                  Optional values
+                </button>
+                <button
+                  class="anatomy-button"
+                  data-component="arguments"
+                  aria-pressed="false"
+                >
+                  Positional arguments
+                </button>
+              </div>
+              <pre
+                class="command-line"
+                tabindex="0"
+                aria-label="Ground-truth command for nmap"
+              ><code id="example-command"><span class="command-token token-tool is-emphasized" data-token="tool">nmap</span> <span class="command-token token-key" data-token="keys">--open</span> <span class="command-token token-key" data-token="keys">-sT</span> <span class="command-token token-key" data-token="keys">-p</span> <span class="command-token token-value" data-token="values">21-25,80</span> <span class="command-token token-argument" data-token="arguments">192.168.1.100</span></code></pre>
+              <p
+                class="anatomy-description"
+                id="anatomy-description"
+                data-example-enhanced
+                hidden
+              >
+                <strong>Tool selection.</strong> The executable is
+                <code>nmap</code>.
+              </p>
+              <div class="example-annotation-summary">
+                <div>
+                  <h4>Tool</h4>
+                  <div id="example-tool">
+                    <code data-annotation="tool">nmap</code>
+                  </div>
+                </div>
+                <div>
+                  <h4>Positional arguments</h4>
+                  <div id="example-positionals">
+                    <ol class="positional-values">
+                      <li>
+                        <code data-annotation="arguments">192.168.1.100</code>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+              <div class="argument-pairs">
+                <h4>Optional arguments</h4>
+                <table
+                  id="example-options-table"
+                  aria-label="Optional argument key/value pairs"
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col">Key / aliases</th>
+                      <th scope="col">Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="example-option-rows">
+                    <tr>
+                      <th scope="row">
+                        <code data-annotation="keys">--open</code>
+                      </th>
+                      <td>
+                        <code data-annotation="values">null</code
+                        ><span class="null-explanation"
+                          >Flag without a value</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <code data-annotation="keys">-sT</code>
+                      </th>
+                      <td>
+                        <code data-annotation="values">null</code
+                        ><span class="null-explanation"
+                          >Flag without a value</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <code data-annotation="keys">-p</code>
+                      </th>
+                      <td><code data-annotation="values">21-25,80</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p id="example-no-options" hidden>
+                  No optional arguments in this example.
+                </p>
+                <p id="example-alias-note" hidden>
+                  Names separated by | are aliases for the same key.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p
+            class="sr-only"
+            id="example-status"
+            aria-live="polite"
+            aria-atomic="true"
+          ></p>
+          <noscript
+            ><p class="example-noscript">
+              This is one of 23 examples. Enable JavaScript to explore each
+              dimension, or download all examples below.
+            </p></noscript
+          >
+          <div class="example-note">
+            <p>
+              Representative dataset examples. Commands are displayed, never
+              run.
+            </p>
+            <a href="assets/examples.json" download
+              >Download examples <span>(JSON)</span></a
+            >
+          </div>
+        </figure>
+        <script type="application/json" id="benchmark-examples-data">
+          {
+            "phases": [
+              {
+                "id": "1",
+                "label": "Reconnaissance \u0026 Initial Access",
+                "short_label": "Reconnaissance \u0026 access"
+              },
+              {
+                "id": "2",
+                "label": "Vulnerability Analysis",
+                "short_label": "Vulnerability analysis"
+              },
+              {
+                "id": "3",
+                "label": "Exploitation \u0026 Payload Delivery",
+                "short_label": "Exploitation \u0026 delivery"
+              },
+              {
+                "id": "4",
+                "label": "Post-Exploitation \u0026 Lateral Movement",
+                "short_label": "Post-exploitation"
+              },
+              {
+                "id": "5",
+                "label": "Defensive Analysis \u0026 Reporting",
+                "short_label": "Defense \u0026 reporting"
+              }
+            ],
+            "sources": {
+              "test": {
+                "path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "sha256": "783193aaa98762ca384f028b7a7c309994c879ebf0fc1b781dcb7169fff89afc"
+              },
+              "train": {
+                "path": "KaliBench_data/kalibench_verified_train_3504.jsonl",
+                "sha256": "93dc4ddff6d9df73bed4b9e92716470e7a73df513f5ca2f1b201c85f2329f909"
+              }
+            },
+            "examples": [
+              {
+                "phase": "1",
+                "dimension": "information-gathering",
+                "dimension_label": "Information gathering",
+                "split": "test",
+                "custom_id": "sample_8052",
+                "tool_name": "nmap",
+                "query": "Scan host 192.168.1.100 using TCP Connect scan on ports 21 through 25 and 80, and display only open ports.",
+                "ground_truth_command": "nmap --open -sT -p 21-25,80 192.168.1.100",
+                "optional_args": {
+                  "--open": null,
+                  "-sT": null,
+                  "-p": "21-25,80"
+                },
+                "positional_args": ["192.168.1.100"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "nmap", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--open", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "-sT", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "-p", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "21-25,80", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "192.168.1.100", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "1",
+                "dimension": "802-11",
+                "dimension_label": "802.11 wireless",
+                "split": "test",
+                "custom_id": "sample_6372",
+                "tool_name": "rfkill",
+                "query": "List all wireless devices and their block status using rfkill with JSON output format.",
+                "ground_truth_command": "rfkill --json list",
+                "optional_args": { "--json|-J": null },
+                "positional_args": ["list"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "rfkill", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--json", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "list", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "1",
+                "dimension": "rfid",
+                "dimension_label": "RFID",
+                "split": "test",
+                "custom_id": "sample_1120",
+                "tool_name": "proxmark3",
+                "query": "Connect to the Proxmark3 device on /dev/ttyACM0 and execute the command 'hf mf chk --1k', then exit without entering interactive mode.",
+                "ground_truth_command": "proxmark3 --command 'hf mf chk --1k' /dev/ttyACM0",
+                "optional_args": { "--command|-c": "hf mf chk --1k" },
+                "positional_args": ["/dev/ttyACM0"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "proxmark3", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--command", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "'hf mf chk --1k'", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "/dev/ttyACM0", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "1",
+                "dimension": "bluetooth",
+                "dimension_label": "Bluetooth",
+                "split": "test",
+                "custom_id": "sample_4205",
+                "tool_name": "hcitool",
+                "query": "Scan for nearby Bluetooth devices using the hcitool command.",
+                "ground_truth_command": "hcitool scan",
+                "optional_args": {},
+                "positional_args": ["scan"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "hcitool", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "scan", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "1",
+                "dimension": "sdr",
+                "dimension_label": "Software-defined radio",
+                "split": "test",
+                "custom_id": "sample_919",
+                "tool_name": "hackrf_transfer",
+                "query": "Use hackrf_transfer to receive data at 2.4 GHz with a sample rate of 10 MHz and save it to a file named 'capture.raw'.",
+                "ground_truth_command": "hackrf_transfer -f 2400000000 -r capture.raw -s 10000000",
+                "optional_args": {
+                  "-f": "2400000000",
+                  "-r": "capture.raw",
+                  "-s": "10000000"
+                },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "hackrf_transfer", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "-f", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "2400000000", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "-r", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "capture.raw", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "-s", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "10000000", "kind": "values" }
+                ]
+              },
+              {
+                "phase": "1",
+                "dimension": "social-engineering",
+                "dimension_label": "Social engineering",
+                "split": "test",
+                "custom_id": "sample_420",
+                "tool_name": "setoolkit",
+                "query": "Run the tool 'setoolkit' to begin using the Social-Engineer Toolkit interface.",
+                "ground_truth_command": "setoolkit",
+                "optional_args": {},
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [{ "text": "setoolkit", "kind": "tool" }]
+              },
+              {
+                "phase": "2",
+                "dimension": "vulnerability",
+                "dimension_label": "Vulnerability analysis",
+                "split": "test",
+                "custom_id": "sample_1112",
+                "tool_name": "nuclei",
+                "query": "Scan the target example.com using Nuclei with the template directory http/cves/ and output results in JSONL format to findings.jsonl.",
+                "ground_truth_command": "nuclei --jsonl --output findings.jsonl --target example.com --templates http/cves/",
+                "optional_args": {
+                  "--jsonl|-j": null,
+                  "--output|-o": "findings.jsonl",
+                  "--target|-u": "example.com",
+                  "--templates|-t": "http/cves/"
+                },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "nuclei", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--jsonl", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "--output", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "findings.jsonl", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "--target", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "example.com", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "--templates", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "http/cves/", "kind": "values" }
+                ]
+              },
+              {
+                "phase": "2",
+                "dimension": "fuzzing",
+                "dimension_label": "Fuzzing",
+                "split": "test",
+                "custom_id": "sample_7447",
+                "tool_name": "llvm-reduce",
+                "query": "Run llvm-reduce on 'crash.ll' with the interestingness test named 'repro.sh', passing '--arg1 value1' to the test script, and limit reductions to 2 threads.",
+                "ground_truth_command": "llvm-reduce -j 2 --test repro.sh --test-arg '--arg1 value1' crash.ll",
+                "optional_args": {
+                  "-j": "2",
+                  "--test": "repro.sh",
+                  "--test-arg": "--arg1 value1"
+                },
+                "positional_args": ["crash.ll"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "llvm-reduce", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "-j", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "2", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "--test", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "repro.sh", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "--test-arg", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "'--arg1 value1'", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "crash.ll", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "2",
+                "dimension": "web",
+                "dimension_label": "Web analysis",
+                "split": "test",
+                "custom_id": "sample_7035",
+                "tool_name": "wafw00f",
+                "query": "Analyze multiple URLs from a file named targets.csv using wafw00f and save results in JSON format to output.json.",
+                "ground_truth_command": "wafw00f --input-file targets.csv --output output.json",
+                "optional_args": {
+                  "--input-file|-i": "targets.csv",
+                  "--output|-o": "output.json"
+                },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "wafw00f", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--input-file", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "targets.csv", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "--output", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "output.json", "kind": "values" }
+                ]
+              },
+              {
+                "phase": "2",
+                "dimension": "database",
+                "dimension_label": "Database analysis",
+                "split": "test",
+                "custom_id": "sample_5864",
+                "tool_name": "sqlmap",
+                "query": "Use sqlmap to test the URL 'http://192.168.1.250/?p=1\u0026forumaction=search' and enumerate all available databases.",
+                "ground_truth_command": "sqlmap --dbs -u 'http://192.168.1.250/?p=1\u0026forumaction=search'",
+                "optional_args": {
+                  "--dbs": null,
+                  "--url|-u": "http://192.168.1.250/?p=1\u0026forumaction=search"
+                },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "sqlmap", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--dbs", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "-u", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  {
+                    "text": "'http://192.168.1.250/?p=1\u0026forumaction=search'",
+                    "kind": "values"
+                  }
+                ]
+              },
+              {
+                "phase": "2",
+                "dimension": "voip",
+                "dimension_label": "VoIP",
+                "split": "test",
+                "custom_id": "sample_1147",
+                "tool_name": "rtpbreak",
+                "query": "Use rtpbreak to analyze RTP traffic from the pcap file 'capture.pcap', fill gaps in raw dumps, and save output to the directory 'rtp_output'.",
+                "ground_truth_command": "rtpbreak -d rtp_output -g -r capture.pcap",
+                "optional_args": {
+                  "-d": "rtp_output",
+                  "-g": null,
+                  "-r": "capture.pcap"
+                },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "rtpbreak", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "-d", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "rtp_output", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "-g", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "-r", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "capture.pcap", "kind": "values" }
+                ]
+              },
+              {
+                "phase": "3",
+                "dimension": "exploitation",
+                "dimension_label": "Exploitation",
+                "split": "test",
+                "custom_id": "sample_2211",
+                "tool_name": "msf-pattern_create",
+                "query": "Generate a Metasploit pattern of length 100 using the default character sets.",
+                "ground_truth_command": "msf-pattern_create --length 100",
+                "optional_args": { "--length|-l": "100" },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "msf-pattern_create", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--length", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "100", "kind": "values" }
+                ]
+              },
+              {
+                "phase": "3",
+                "dimension": "sniffing-spoofing",
+                "dimension_label": "Sniffing and spoofing",
+                "split": "test",
+                "custom_id": "sample_3344",
+                "tool_name": "webspy",
+                "query": "Use webspy to monitor HTTP traffic from the host 192.168.1.100 using the default network interface.",
+                "ground_truth_command": "webspy 192.168.1.100",
+                "optional_args": {},
+                "positional_args": ["192.168.1.100"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "webspy", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "192.168.1.100", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "3",
+                "dimension": "hardware",
+                "dimension_label": "Hardware",
+                "split": "test",
+                "custom_id": "sample_3762",
+                "tool_name": "qemu-system-arm",
+                "query": "Launch an ARM-based QEMU instance using the 'virt' machine type, 4 CPU cores, and load the kernel 'vmlinuz' with initrd 'initrd.img'.",
+                "ground_truth_command": "qemu-system-arm -kernel vmlinuz -initrd initrd.img -machine type=virt -smp cpus=4",
+                "optional_args": {
+                  "-initrd": "initrd.img",
+                  "-kernel": "vmlinuz",
+                  "-machine": "type=virt",
+                  "-smp": "cpus=4"
+                },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "qemu-system-arm", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "-kernel", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "vmlinuz", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "-initrd", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "initrd.img", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "-machine", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "type=virt", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "-smp", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "cpus=4", "kind": "values" }
+                ]
+              },
+              {
+                "phase": "3",
+                "dimension": "wireless",
+                "dimension_label": "Wireless",
+                "split": "test",
+                "custom_id": "sample_4038",
+                "tool_name": "sakis3g",
+                "query": "Use sakis3g to initiate an interactive connection session.",
+                "ground_truth_command": "sakis3g --interactive connect",
+                "optional_args": { "--interactive": null },
+                "positional_args": ["connect"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "sakis3g", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--interactive", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "connect", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "4",
+                "dimension": "post-exploitation",
+                "dimension_label": "Post-exploitation",
+                "split": "train",
+                "custom_id": "sample_4566",
+                "tool_name": "sudo",
+                "query": "In list mode, display the privileges of user 'eve' as they would apply to the command 'cat /etc/shadow', using non-interactive mode.",
+                "ground_truth_command": "sudo --list --non-interactive -U eve cat /etc/shadow",
+                "optional_args": {
+                  "--list|-l": null,
+                  "--non-interactive|-n": null,
+                  "--other-user|-U": "eve"
+                },
+                "positional_args": ["cat", "/etc/shadow"],
+                "source_path": "KaliBench_data/kalibench_verified_train_3504.jsonl",
+                "tokens": [
+                  { "text": "sudo", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--list", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "--non-interactive", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "-U", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "eve", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "cat", "kind": "arguments" },
+                  { "text": " ", "kind": null },
+                  { "text": "/etc/shadow", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "4",
+                "dimension": "passwords",
+                "dimension_label": "Passwords",
+                "split": "test",
+                "custom_id": "sample_4684",
+                "tool_name": "ncrack",
+                "query": "Run ncrack with maximum speed template (-T5), targeting SSH on 10.0.0.5, using usernames from users.txt and passwords from pass.txt, and stop after first successful login.",
+                "ground_truth_command": "ncrack -f -T5 -P pass.txt -U users.txt ssh://10.0.0.5",
+                "optional_args": {
+                  "-f": null,
+                  "-T": "5",
+                  "-P": "pass.txt",
+                  "-U": "users.txt"
+                },
+                "positional_args": ["ssh://10.0.0.5"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "ncrack", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "-f", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "-T", "kind": "keys" },
+                  { "text": "5", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "-P", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "pass.txt", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "-U", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "users.txt", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "ssh://10.0.0.5", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "4",
+                "dimension": "windows-resources",
+                "dimension_label": "Windows resources",
+                "split": "test",
+                "custom_id": "sample_2257",
+                "tool_name": "dnschef",
+                "query": "Start DNSChef on the loopback interface using Google's public DNS server 8.8.8.8 in full proxy mode.",
+                "ground_truth_command": "dnschef --interface 127.0.0.1 --nameserver 8.8.8.8",
+                "optional_args": {
+                  "--interface": "127.0.0.1",
+                  "--nameserver": "8.8.8.8"
+                },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "dnschef", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--interface", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "127.0.0.1", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "--nameserver", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "8.8.8.8", "kind": "values" }
+                ]
+              },
+              {
+                "phase": "4",
+                "dimension": "crypto-stego",
+                "dimension_label": "Cryptography and steganography",
+                "split": "test",
+                "custom_id": "sample_4077",
+                "dimension_short_label": "Crypto \u0026 steganography",
+                "tool_name": "ccdecrypt",
+                "query": "Using the ccdecrypt alias, decrypt 'archive.zip.cpt' with the key 'mypassword', overwriting any existing output file without prompting.",
+                "ground_truth_command": "ccdecrypt --force --key mypassword archive.zip.cpt",
+                "optional_args": {
+                  "--force|-f": null,
+                  "--key|-K": "mypassword"
+                },
+                "positional_args": ["archive.zip.cpt"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "ccdecrypt", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--force", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "--key", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "mypassword", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "archive.zip.cpt", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "5",
+                "dimension": "reverse-engineering",
+                "dimension_label": "Reverse engineering",
+                "split": "test",
+                "custom_id": "sample_3536",
+                "tool_name": "d2j-baksmali",
+                "query": "Disassemble the dex file app.dex into smali files in the directory 'output_smali', forcing overwrite if it already exists.",
+                "ground_truth_command": "d2j-baksmali --force --output output_smali app.dex",
+                "optional_args": {
+                  "--force|-f": null,
+                  "--output|-o": "output_smali"
+                },
+                "positional_args": ["app.dex"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "d2j-baksmali", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--force", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "--output", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "output_smali", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "app.dex", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "5",
+                "dimension": "forensics",
+                "dimension_label": "Forensics",
+                "split": "test",
+                "custom_id": "sample_3642",
+                "tool_name": "jadx",
+                "query": "Decompile the APK file 'app.apk' into Java source code and save the output in the directory 'output_dir', without decoding any resources.",
+                "ground_truth_command": "jadx --no-res --output-dir output_dir app.apk",
+                "optional_args": {
+                  "--no-res|-r": null,
+                  "--output-dir|-d": "output_dir"
+                },
+                "positional_args": ["app.apk"],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "jadx", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--no-res", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "--output-dir", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "output_dir", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "app.apk", "kind": "arguments" }
+                ]
+              },
+              {
+                "phase": "5",
+                "dimension": "reporting",
+                "dimension_label": "Reporting",
+                "split": "test",
+                "custom_id": "sample_3692",
+                "tool_name": "recordmydesktop",
+                "query": "Record my desktop with a delay of 5 seconds before starting, output the video as 'demo.ogv', and disable sound recording.",
+                "ground_truth_command": "recordmydesktop --delay 5 --no-sound --output demo.ogv",
+                "optional_args": {
+                  "--delay": "5",
+                  "--no-sound": null,
+                  "--output|-o": "demo.ogv"
+                },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "recordmydesktop", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--delay", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "5", "kind": "values" },
+                  { "text": " ", "kind": null },
+                  { "text": "--no-sound", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "--output", "kind": "keys" },
+                  { "text": " ", "kind": null },
+                  { "text": "demo.ogv", "kind": "values" }
+                ]
+              },
+              {
+                "phase": "5",
+                "dimension": "gpu",
+                "dimension_label": "GPU tools",
+                "split": "test",
+                "custom_id": "sample_8306",
+                "tool_name": "oclgausscrack",
+                "query": "What command would you use to get help output from oclgausscrack?",
+                "ground_truth_command": "oclgausscrack --help",
+                "optional_args": { "--help|-h": null },
+                "positional_args": [],
+                "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+                "tokens": [
+                  { "text": "oclgausscrack", "kind": "tool" },
+                  { "text": " ", "kind": null },
+                  { "text": "--help", "kind": "keys" }
+                ]
+              }
+            ]
+          }
+        </script>
+        <!-- END EXAMPLE EXPLORER -->
+      </section>
+      <section class="findings-section" aria-labelledby="findings-title">
+        <div class="container">
+          <h2 id="findings-title">Key findings</h2>
+          <p class="section-intro">
+            24 open-weight model configurations, evaluated on 5,000 queries.
+          </p>
+          <div class="findings-grid">
+            <article class="finding">
+              <p class="finding-value">41.3<span>%</span></p>
+              <h3>Exact commands remain difficult</h3>
+              <p>
+                The strongest evaluated open-weight model gets fewer than half
+                of the commands exactly right without tool hints.
+              </p>
+            </article>
+            <article class="finding">
+              <p class="finding-value">
+                22.3<span class="value-arrow">→</span>73.1<span>%</span>
+              </p>
+              <h3>Tool documentation improves accuracy</h3>
+              <p>
+                Average exact-command accuracy rises sharply with tool
+                documentation. Argument construction is the main bottleneck.
+              </p>
+            </article>
+            <article class="finding">
+              <p class="finding-value">+7.5<span>points</span></p>
+              <h3>Targeted training improves an 8B model</h3>
+              <p>
+                SFT followed by GRPO raises average total score from 71.7 to
+                79.2, within 1.0 point of DeepSeek-V3.2.
+              </p>
+            </article>
+          </div>
+          <p class="table-source">
+            Source: Table 1. The 41.3% result applies to the evaluated
+            open-weight models; additional systems are reported separately
+            below.
+          </p>
+        </div>
+      </section>
+      <section
+        class="section container results-section"
+        id="results"
+        aria-labelledby="results-title"
+      >
+        <div class="section-heading">
+          <h2 id="results-title">Results across three evaluation settings</h2>
+          <p class="section-intro">
+            Select how much tool information the model receives, then compare
+            performance by metric.
+          </p>
+        </div>
+        <div class="mode-controls" role="group" aria-label="Evaluation mode">
+          <button
+            class="mode-card active"
+            data-mode="0"
+            aria-pressed="true"
+            disabled=""
+          >
+            <strong>Unrestricted</strong
+            ><span class="mode-description"
+              >Query only. The model chooses the tool and its arguments.</span
+            ><span class="mode-bottom"
+              ><span>Average exact correct</span
+              ><strong>22.3<small>%</small></strong></span
+            ></button
+          ><button
+            class="mode-card"
+            data-mode="1"
+            aria-pressed="false"
+            disabled=""
+          >
+            <strong>Restricted</strong
+            ><span class="mode-description"
+              >Query and 20 candidate tools, including the correct tool.</span
+            ><span class="mode-bottom"
+              ><span>Average exact correct</span
+              ><strong>28.3<small>%</small></strong></span
+            ></button
+          ><button
+            class="mode-card"
+            data-mode="2"
+            aria-pressed="false"
+            disabled=""
+          >
+            <strong>Hinted</strong
+            ><span class="mode-description"
+              >Query, the target tool, and its usage documentation.</span
+            ><span class="mode-bottom"
+              ><span>Average exact correct</span
+              ><strong>73.1<small>%</small></strong></span
+            >
+          </button>
+        </div>
+        <div class="leaderboard">
+          <div class="leaderboard-toolbar">
+            <div>
+              <span class="live-dot"></span>
+              <h3 id="leaderboard-title">Unrestricted results</h3>
+              <span class="table-count" id="table-count">All 24 models</span>
+            </div>
+            <label for="sort-metric"
+              >Sort by
+              <select id="sort-metric">
+                <option value="exact">Exact correct</option>
+                <option value="total">Total score</option>
+                <option value="tool">Tool accuracy</option>
+                <option value="optional">Optional-arg F1</option>
+                <option value="positional">Positional-arg F1</option>
+              </select></label
+            >
+          </div>
+          <p class="table-scroll-hint" id="table-scroll-hint">
+            Scroll horizontally to compare all metrics
+            <span aria-hidden="true">→</span>
+          </p>
+          <div
+            class="table-scroll"
+            role="region"
+            aria-describedby="table-scroll-hint"
+            aria-labelledby="leaderboard-title"
+            tabindex="0"
+          >
+            <table class="results-table">
+              <caption class="sr-only">
+                Open-weight model results from Table 1 of the paper. All scores
+                are percentages. Sorted by the selected metric.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Model</th>
+                  <th
+                    scope="col"
+                    data-metric="exact"
+                    aria-sort="descending"
+                    class="metric-selected"
+                  >
+                    Exact correct ↓
+                  </th>
+                  <th scope="col" data-column="size">Size <span>(B)</span></th>
+                  <th scope="col" data-metric="tool">Tool acc.</th>
+                  <th scope="col" data-metric="optional">Optional F1</th>
+                  <th scope="col" data-metric="positional">Positional F1</th>
+                  <th scope="col" data-metric="total">Total score</th>
+                </tr>
+              </thead>
+              <tbody id="results-body">
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">01</span
+                    ><span class="model-name">GLM-5.2</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    >
+                  </th>
+                  <td class="metric-selected">41.3</td>
+                  <td>753</td>
+                  <td>86.3</td>
+                  <td>75.3</td>
+                  <td>51.3</td>
+                  <td>71.0</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">02</span
+                    ><span class="model-name">DeepSeek-V3.2</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    >
+                  </th>
+                  <td class="metric-selected">33.0</td>
+                  <td>685 / 37</td>
+                  <td>75.8</td>
+                  <td>57.0</td>
+                  <td>68.8</td>
+                  <td>67.2</td>
+                </tr>
+                <tr class="our-model">
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">03</span
+                    ><span class="model-name">RedSage-K (SFT+GRPO)</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    ><span class="ours-tag">Ours</span>
+                  </th>
+                  <td class="metric-selected">32.2</td>
+                  <td>8</td>
+                  <td>77.9</td>
+                  <td>56.1</td>
+                  <td>76.9</td>
+                  <td>70.3</td>
+                </tr>
+                <tr class="our-model">
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">04</span
+                    ><span class="model-name">RedSage-K (SFT)</span
+                    ><span class="ours-tag">Ours</span>
+                  </th>
+                  <td class="metric-selected">30.6</td>
+                  <td>8</td>
+                  <td>78.1</td>
+                  <td>52.8</td>
+                  <td>66.9</td>
+                  <td>65.9</td>
+                </tr>
+                <tr class="our-model">
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">05</span
+                    ><span class="model-name">RedSage-K (GRPO)</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    ><span class="ours-tag">Ours</span>
+                  </th>
+                  <td class="metric-selected">28.1</td>
+                  <td>8</td>
+                  <td>76.5</td>
+                  <td>51.7</td>
+                  <td>73.9</td>
+                  <td>67.4</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">06</span
+                    ><span class="model-name">Qwen3-Coder-Next</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    >
+                  </th>
+                  <td class="metric-selected">26.2</td>
+                  <td>80 / 3</td>
+                  <td>74.1</td>
+                  <td>48.8</td>
+                  <td>63.9</td>
+                  <td>62.3</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">07</span
+                    ><span class="model-name">Qwen2.5-Ins</span>
+                  </th>
+                  <td class="metric-selected">25.4</td>
+                  <td>72</td>
+                  <td>76.0</td>
+                  <td>47.7</td>
+                  <td>67.0</td>
+                  <td>63.6</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">08</span
+                    ><span class="model-name">Qwen3</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    >
+                  </th>
+                  <td class="metric-selected">24.0</td>
+                  <td>32</td>
+                  <td>72.4</td>
+                  <td>47.2</td>
+                  <td>65.3</td>
+                  <td>61.6</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">09</span
+                    ><span class="model-name">GPT-OSS</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    >
+                  </th>
+                  <td class="metric-selected">24.0</td>
+                  <td>120 / 5.1</td>
+                  <td>73.6</td>
+                  <td>48.0</td>
+                  <td>61.4</td>
+                  <td>61.0</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">10</span
+                    ><span class="model-name">Llama-3.3-Ins</span>
+                  </th>
+                  <td class="metric-selected">22.6</td>
+                  <td>70</td>
+                  <td>72.1</td>
+                  <td>45.7</td>
+                  <td>61.9</td>
+                  <td>59.9</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">11</span
+                    ><span class="model-name">Qwen3</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    >
+                  </th>
+                  <td class="metric-selected">20.9</td>
+                  <td>8</td>
+                  <td>70.3</td>
+                  <td>42.9</td>
+                  <td>59.9</td>
+                  <td>57.7</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">12</span
+                    ><span class="model-name">Mistral-Small-3.2</span>
+                  </th>
+                  <td class="metric-selected">20.7</td>
+                  <td>24</td>
+                  <td>70.6</td>
+                  <td>44.3</td>
+                  <td>62.6</td>
+                  <td>59.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">13</span
+                    ><span class="model-name">Qwen3</span>
+                  </th>
+                  <td class="metric-selected">20.6</td>
+                  <td>32</td>
+                  <td>73.5</td>
+                  <td>43.4</td>
+                  <td>62.8</td>
+                  <td>59.9</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">14</span
+                    ><span class="model-name">RedSage-Ins</span>
+                  </th>
+                  <td class="metric-selected">19.7</td>
+                  <td>8</td>
+                  <td>67.9</td>
+                  <td>42.4</td>
+                  <td>58.8</td>
+                  <td>56.4</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">15</span
+                    ><span class="model-name">GPT-OSS</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    >
+                  </th>
+                  <td class="metric-selected">19.6</td>
+                  <td>20 / 3.6</td>
+                  <td>72.3</td>
+                  <td>42.2</td>
+                  <td>57.1</td>
+                  <td>57.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">16</span
+                    ><span class="model-name">Gemma-3-it</span>
+                  </th>
+                  <td class="metric-selected">18.9</td>
+                  <td>27</td>
+                  <td>73.4</td>
+                  <td>40.9</td>
+                  <td>60.2</td>
+                  <td>58.1</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">17</span
+                    ><span class="model-name">Llama-Primus-Ins</span>
+                  </th>
+                  <td class="metric-selected">18.8</td>
+                  <td>70</td>
+                  <td>72.8</td>
+                  <td>41.9</td>
+                  <td>59.6</td>
+                  <td>58.1</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">18</span
+                    ><span class="model-name">Qwen3</span>
+                  </th>
+                  <td class="metric-selected">18.3</td>
+                  <td>8</td>
+                  <td>68.9</td>
+                  <td>39.3</td>
+                  <td>58.5</td>
+                  <td>55.5</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">19</span
+                    ><span class="model-name">RedSage-DPO</span>
+                  </th>
+                  <td class="metric-selected">18.2</td>
+                  <td>8</td>
+                  <td>66.8</td>
+                  <td>40.1</td>
+                  <td>56.7</td>
+                  <td>54.5</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">20</span
+                    ><span class="model-name">Llama-Primus-Merged</span>
+                  </th>
+                  <td class="metric-selected">16.3</td>
+                  <td>8</td>
+                  <td>66.2</td>
+                  <td>36.7</td>
+                  <td>56.6</td>
+                  <td>53.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">21</span
+                    ><span class="model-name">Llama-Primus-Base</span>
+                  </th>
+                  <td class="metric-selected">15.8</td>
+                  <td>8</td>
+                  <td>67.3</td>
+                  <td>36.6</td>
+                  <td>56.3</td>
+                  <td>53.4</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">22</span
+                    ><span class="model-name">Foundation-Sec-Ins</span>
+                  </th>
+                  <td class="metric-selected">14.7</td>
+                  <td>8</td>
+                  <td>66.5</td>
+                  <td>33.5</td>
+                  <td>53.0</td>
+                  <td>51.0</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">23</span
+                    ><span class="model-name">Foundation-Sec-Rsn</span
+                    ><span class="reasoning-mark" aria-label="Reasoning enabled"
+                      >†</span
+                    >
+                  </th>
+                  <td class="metric-selected">13.3</td>
+                  <td>8</td>
+                  <td>67.0</td>
+                  <td>34.8</td>
+                  <td>53.0</td>
+                  <td>51.6</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <span class="rank" aria-hidden="true">24</span
+                    ><span class="model-name">Llama3.1-Ins</span>
+                  </th>
+                  <td class="metric-selected">12.5</td>
+                  <td>8</td>
+                  <td>61.7</td>
+                  <td>32.4</td>
+                  <td>53.5</td>
+                  <td>49.2</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <noscript
+            ><p class="noscript-note">
+              All 24 unrestricted results are shown in the table. Enable
+              JavaScript to switch modes and sort metrics.
+            </p></noscript
+          >
+          <div class="leaderboard-footer">
+            <p>
+              <span class="ours-key"></span>Our models
+              <span class="footer-divider">/</span> † Reasoning enabled
+              <span class="footer-divider">/</span> MoE size: total / active
+            </p>
+            <button
+              class="text-button"
+              id="show-all"
+              aria-expanded="false"
+              aria-controls="results-body"
+            >
+              Show all 24 models <span aria-hidden="true">↓</span>
+            </button>
+          </div>
+        </div>
+        <p class="table-source">
+          Source: Paper, Table 1. Reported scores are rounded to one decimal
+          place; mode averages include all 24 configurations. This is the
+          paper’s evaluation snapshot, not a live leaderboard.
+        </p>
+        <p class="model-naming">
+          Our models are named <strong>RedSage-K</strong> here. They correspond
+          to the paper’s Kali-SFT+GRPO, Kali-SFT, and Kali-GRPO variants,
+          respectively.
+        </p>
+        <details class="metric-help">
+          <summary>
+            How are the scores calculated? <span aria-hidden="true">+</span>
+          </summary>
+          <dl>
+            <div>
+              <dt>Tool accuracy</dt>
+              <dd>Whether the model selects the correct tool.</dd>
+            </div>
+            <div>
+              <dt>Optional-argument F1</dt>
+              <dd>Alias-aware matching of optional flag names.</dd>
+            </div>
+            <div>
+              <dt>Positional-argument F1</dt>
+              <dd>Multiset matching of positional argument values.</dd>
+            </div>
+            <div>
+              <dt>Total score</dt>
+              <dd>
+                The mean of tool accuracy, optional-argument F1, and
+                positional-argument F1.
+              </dd>
+            </div>
+            <div>
+              <dt>Exact correct</dt>
+              <dd>
+                The paper’s end-to-end metric for canonicalized command
+                correctness. It permits documented aliases and reordered
+                optional flags, while respecting positional argument order.
+              </dd>
+            </div>
+          </dl>
+          <p>
+            All scores are percentages; higher is better. Full metric
+            definitions: paper, Appendix L.
+          </p>
+        </details>
+        <details class="additional-results">
+          <summary>
+            <span
+              ><span class="detail-label">Beyond open weights</span>Proprietary
+              models &amp; scaffolded inference</span
+            ><span class="details-plus" aria-hidden="true">+</span>
+          </summary>
+          <div class="additional-body">
+            <p>
+              Table 2 evaluates three additional systems in the unrestricted
+              setting. Full-set Exact Correct counts blocked or missing
+              responses as incorrect, making response coverage part of the
+              comparison.
+            </p>
+            <div
+              class="table-scroll"
+              role="region"
+              aria-label="Additional system results"
+              tabindex="0"
+            >
+              <table class="additional-table">
+                <caption class="sr-only">
+                  Additional unrestricted results, paper Table 2
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">System</th>
+                    <th scope="col">Answered / 5,000</th>
+                    <th scope="col">EC, answered</th>
+                    <th scope="col">EC, all 5,000</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">GPT-5.6-Sol</th>
+                    <td>4,988</td>
+                    <td>61.83%</td>
+                    <td><strong>61.68%</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Codex CLI (GPT-5.5, xhigh)</th>
+                    <td>4,633</td>
+                    <td>55.77%</td>
+                    <td><strong>51.68%</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Claude Opus 5</th>
+                    <td>3,675</td>
+                    <td>59.89%</td>
+                    <td><strong>44.02%</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="table-source">
+              Source: Paper, Table 2. Codex is evaluated as a scaffolded CLI
+              system; only its final submitted command is scored.
+            </p>
+          </div>
+        </details>
+      </section>
+      <section
+        class="section method-section"
+        id="method"
+        aria-labelledby="method-title"
+      >
+        <div class="container">
+          <div class="section-heading">
+            <h2 id="method-title">Dataset construction</h2>
+            <p class="section-intro">
+              Documentation-grounded generation, multiple rounds of
+              verification, and semantic deduplication produce a compact dataset
+              with broad tool coverage.
+            </p>
+          </div>
+          <figure class="pipeline-figure">
+            <a
+              href="assets/pipeline.png"
+              aria-label="Open the full-resolution dataset construction figure"
+              ><img
+                src="assets/pipeline.png"
+                width="2230"
+                height="1023"
+                alt="KaliBench construction pipeline. Official Kali documentation grounds generation; LLM verification, sandbox execution, and human review validate the examples; semantic deduplication produces 8,504 pairs for fine-grained evaluation."
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <strong>Figure 2.</strong> The end-to-end pipeline from the
+              current paper.
+              <a href="assets/pipeline.png">Open full-size figure</a>.
+            </figcaption>
+          </figure>
+          <ol class="method-steps">
+            <li>
+              <h3>Generate from documentation</h3>
+              <p>
+                Tool names, documented flags, values, and aliases ground 27.7K
+                candidate query–command pairs.
+              </p>
+            </li>
+            <li>
+              <h3>Verify and refine</h3>
+              <p>
+                LLM checks, sandboxed Kali execution, and human review remove
+                unsupported syntax and labeling errors.
+              </p>
+            </li>
+            <li>
+              <h3>Deduplicate and split</h3>
+              <p>
+                8,504 verified pairs remain: 3,504 for training and 5,000 for
+                evaluation, with all 1,642 tools represented in the test set.
+              </p>
+            </li>
+          </ol>
+          <details class="coverage-details">
+            <summary>
+              Coverage across 23 dimensions and 5 security phases
+              <span aria-hidden="true">+</span>
+            </summary>
+            <ol class="phase-list">
+              <li>
+                <span class="phase-number">01</span>
+                <div>
+                  <h4>Reconnaissance &amp; Initial Access</h4>
+                  <p>
+                    Information gathering · 802.11 · RFID · Bluetooth · SDR ·
+                    Social engineering
+                  </p>
+                </div>
+                <span class="phase-count">6</span>
+              </li>
+              <li>
+                <span class="phase-number">02</span>
+                <div>
+                  <h4>Vulnerability Analysis</h4>
+                  <p>Vulnerability · Fuzzing · Web · Database · VoIP</p>
+                </div>
+                <span class="phase-count">5</span>
+              </li>
+              <li>
+                <span class="phase-number">03</span>
+                <div>
+                  <h4>Exploitation &amp; Payload Delivery</h4>
+                  <p>
+                    Exploitation · Sniffing &amp; spoofing · Hardware · Wireless
+                  </p>
+                </div>
+                <span class="phase-count">4</span>
+              </li>
+              <li>
+                <span class="phase-number">04</span>
+                <div>
+                  <h4>Post-Exploitation &amp; Lateral Movement</h4>
+                  <p>
+                    Post-exploitation · Passwords · Windows resources ·
+                    Cryptography &amp; steganography
+                  </p>
+                </div>
+                <span class="phase-count">4</span>
+              </li>
+              <li>
+                <span class="phase-number">05</span>
+                <div>
+                  <h4>Defensive Analysis &amp; Reporting</h4>
+                  <p>Reverse engineering · Forensics · Reporting · GPU</p>
+                </div>
+                <span class="phase-count">4</span>
+              </li>
+            </ol>
+            <p>Taxonomy: paper, Section 3.</p>
+          </details>
+        </div>
+      </section>
+      <section
+        class="section training-section"
+        aria-labelledby="training-title"
+      >
+        <div class="container training-grid">
+          <div>
+            <h2 id="training-title">Training with verifiable rewards</h2>
+            <p>
+              Ground-truth commands are verified during dataset construction.
+              During training, deterministic scoring provides rewards for tool
+              selection, arguments, exact command correctness, and output
+              format—without executing model predictions.
+            </p>
+            <p>
+              Starting from RedSage-Ins, SFT followed by GRPO improves the 8B
+              model’s average total score from <strong>71.7 to 79.2</strong>.
+            </p>
+            <a class="text-link" href="guides/training.html"
+              >Training guide
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="#icon-arrow"></use></svg
+            ></a>
+          </div>
+          <div class="training-chart">
+            <div class="chart-heading">
+              <span>Post-training comparison</span
+              ><span class="mono">Average total score (%)</span>
+            </div>
+            <div class="training-chart-rows">
+              <div class="training-bar-row">
+                <div>
+                  <span>RedSage-Ins <small>8B · baseline</small></span
+                  ><strong>71.7</strong>
+                </div>
+                <div class="training-track">
+                  <span style="width: 71.7%"></span>
+                </div>
+              </div>
+              <div class="training-bar-row">
+                <div>
+                  <span>RedSage-K (SFT) <small>8B</small></span
+                  ><strong>77.4</strong>
+                </div>
+                <div class="training-track">
+                  <span style="width: 77.4%"></span>
+                </div>
+              </div>
+              <div class="training-bar-row highlighted">
+                <div>
+                  <span>RedSage-K (SFT+GRPO) <small>8B · ours</small></span
+                  ><strong>79.2</strong>
+                </div>
+                <div class="training-track">
+                  <span style="width: 79.2%"></span>
+                </div>
+              </div>
+              <div class="training-bar-row">
+                <div>
+                  <span>DeepSeek-V3.2 <small>685B / 37B active</small></span
+                  ><strong>80.2</strong>
+                </div>
+                <div class="training-track">
+                  <span style="width: 80.2%"></span>
+                </div>
+              </div>
+            </div>
+            <div class="chart-axis" aria-hidden="true">
+              <span>0</span><span>25</span><span>50</span><span>75</span
+              ><span>100%</span>
+            </div>
+            <p class="chart-footnote">
+              Average across all three modes · Paper, Table 1. SFT+GRPO is 1.0
+              point behind DeepSeek-V3.2. Gains are strongest without
+              documentation; GRPO can reduce hinted-mode performance.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section
+        class="section container resources-section"
+        id="resources"
+        aria-labelledby="resources-title"
+      >
+        <div class="section-heading">
+          <h2 id="resources-title">Paper, data, and code</h2>
+          <p class="section-intro">
+            Everything needed to inspect the benchmark, train a model, or
+            reproduce the evaluation.
+          </p>
+        </div>
+        <div class="resource-grid">
+          <div class="resource-card resource-pending">
+            <h3>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="#icon-paper"></use></svg
+              >Paper
+            </h3>
+            <p>The arXiv version is in preparation.</p>
+            <span class="resource-label">Coming soon</span>
+          </div>
+          <a
+            class="resource-card"
+            href="https://huggingface.co/datasets/anonymous62567/KaliBench-Verified"
+            ><h3>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="#icon-data"></use></svg
+              >Dataset
+            </h3>
+            <p>Verified examples, annotations, and train/test splits.</p>
+            <span class="resource-label"
+              >Hugging Face
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="#icon-arrow"></use></svg></span></a
+          ><a
+            class="resource-card"
+            href="https://github.com/RISys-Lab/KaliBench"
+            ><h3>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="#icon-github"></use></svg
+              >Code
+            </h3>
+            <p>Construction, training, inference, and scoring.</p>
+            <span class="resource-label"
+              >GitHub
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="#icon-arrow"></use></svg></span
+          ></a>
+        </div>
+        <div class="getting-started">
+          <div>
+            <h3>Run your own evaluation</h3>
+            <p>
+              Clone the repository, set up the environment, and choose a local
+              model or Hugging Face model ID.
+            </p>
+            <a class="text-link" href="guides/evaluation.html"
+              >Evaluation guide
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="#icon-arrow"></use></svg
+            ></a>
+          </div>
+          <div class="quickstart-code">
+            <div class="code-label">
+              <span>Get the repository</span
+              ><button
+                class="copy-button"
+                data-copy="clone-command"
+                aria-label="Copy clone commands"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="#icon-copy"></use></svg
+                ><span>Copy</span>
+              </button>
+            </div>
+            <pre
+              tabindex="0"
+            ><code id="clone-command">git clone https://github.com/RISys-Lab/KaliBench.git
+cd KaliBench</code></pre>
+            <p>
+              Environment setup and GPU requirements are included in the guide.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section
+        class="section citation-section"
+        id="citation"
+        aria-labelledby="citation-title"
+      >
+        <div class="container citation-grid">
+          <div>
+            <h2 id="citation-title">Citation</h2>
+            <p>If you use KaliBench in your research, please cite our paper.</p>
+            <a class="text-link" href="assets/kalibench.bib" download=""
+              >Download BibTeX
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="#icon-arrow"></use></svg
+            ></a>
+          </div>
+          <div class="citation-code">
+            <div class="code-label">
+              <span>BIBTEX</span
+              ><button
+                class="copy-button"
+                data-copy="bibtex"
+                aria-label="Copy BibTeX citation"
+              >
+                <svg aria-hidden="true" focusable="false" class="icon">
+                  <use href="#icon-copy"></use></svg
+                ><span>Copy citation</span>
+              </button>
+            </div>
+            <pre tabindex="0"><code id="bibtex">@inproceedings{li2026kalibench,
+  title     = {{KaliBench}: A Fine-Grained Benchmark for
+               Cybersecurity Tool Use on {Kali Linux}
+               with Runtime-Free Verifiable Rewards},
+  author    = {Li, Pengfei and Suryanto, Naufal and
+               Zhang, Sicheng and Naseer, Muzammal},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026},
+  note      = {Evaluations and Datasets Track},
+  url       = {https://github.com/RISys-Lab/KaliBench}
+}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer container">
+      <a href="#main" aria-label="KaliBench home"
+        ><img src="assets/logo.png" width="83" height="46" alt="KaliBench"
+      /></a>
+      <p>RISys-Lab · Khalifa University</p>
+      <a href="#main" class="back-top"
+        >Back to top <span aria-hidden="true">↑</span></a
+      >
+    </footer>
+    <div
+      class="sr-only"
+      id="interaction-status"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </body>
+</html>

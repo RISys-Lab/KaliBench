@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Training guide for KaliBench. Environment setup, commands, and reproducible workflows."
+    />
+    <title>Training | KaliBench</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png" />
+    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      rel="canonical"
+      href="https://risys-lab.github.io/KaliBench/guides/training.html"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="guide-header">
+      <nav class="container guide-nav" aria-label="Documentation navigation">
+        <a class="wordmark" href="../index.html" aria-label="KaliBench home"
+          ><img
+            src="../assets/logo.png"
+            width="83"
+            height="46"
+            alt="KaliBench" /></a
+        ><a href="../index.html">Project page</a
+        ><a href="evaluation.html">Evaluation</a
+        ><a href="training.html" aria-current="page">Training</a>
+      </nav>
+    </header>
+    <div class="container guide-layout">
+      <main id="main" class="guide-content">
+        <h1>Training</h1>
+        <h2 id="environment-setup">Environment setup</h2>
+        <p>
+          Run these commands from a clone of the repository. Python 3.10 is
+          recommended.
+        </p>
+        <pre
+          tabindex="0"
+        ><code class="language-bash">git clone https://github.com/RISys-Lab/KaliBench.git
+cd KaliBench
+conda create -n kalibench python=3.10
+conda activate kalibench
+pip install -r requirements.txt
+</code></pre>
+        <p>
+          Evaluation uses vLLM. PyTorch, CUDA, vLLM, and FlashInfer/Triton
+          builds must be compatible with your GPU and driver. Model downloads
+          require network access unless already cached.
+        </p>
+        <p>
+          Complete the <a href="#environment-setup">environment setup</a>, then
+          install the training dependencies:
+        </p>
+        <pre
+          tabindex="0"
+        ><code class="language-bash">pip install unsloth trl wandb
+</code></pre>
+        <p>
+          Unsloth, TRL, PyTorch, and CUDA must be compatible with your GPU and
+          driver. The examples use <code>--report-to none</code> to disable
+          Weights &amp; Biases logging. Run all commands from the repository
+          root.
+        </p>
+        <p>Set the base model to a local path or a Hugging Face model ID:</p>
+        <pre
+          tabindex="0"
+        ><code class="language-bash">export BASE_MODEL="/path/to/base-model"
+</code></pre>
+        <p>The main paper-reproduction path is:</p>
+        <pre
+          tabindex="0"
+        ><code class="language-text">constructed and verified training split → KaliBench SFT → GRPO/RLVR → merged model → evaluation
+</code></pre>
+        <h2 id="1-supervised-finetuning">1. Supervised fine-tuning</h2>
+        <p>
+          The KaliBench SFT implementation creates examples in all three modes,
+          applies output-only supervision, trains LoRA adapters with
+          Unsloth/TRL, and saves both the adapter and a merged 16-bit model.
+        </p>
+        <pre
+          tabindex="0"
+        ><code class="language-bash">python src/train/sft_kalibench.py \
+  --model-name "$BASE_MODEL" \
+  --dataset-path "$PWD/KaliBench_data/kalibench_verified_train_3504.jsonl" \
+  --subtools-path "$PWD/KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl" \
+  --mode hinted restricted unrestricted \
+  --candidate-tools 20 \
+  --candidate-seed 42 \
+  --seed 3407 \
+  --output-dir "$PWD/outputs/models/kalibench_sft" \
+  --adapter-output-dir "$PWD/outputs/adapters/kalibench_sft" \
+  --report-to none
+</code></pre>
+        <p>Outputs:</p>
+        <pre
+          tabindex="0"
+        ><code class="language-text">outputs/adapters/kalibench_sft/       # LoRA adapter and tokenizer
+outputs/models/kalibench_sft/merged/  # merged 16-bit model
+</code></pre>
+        <p>
+          The default optimizer, LoRA rank, sequence length, batch size,
+          accumulation, epoch count, learning rate, warmup, and checkpoint
+          cadence are exposed as CLI flags. Run
+          <code>python src/train/sft_kalibench.py --help</code> for the complete
+          configuration.
+        </p>
+        <h2 id="2-grporlvr">2. GRPO/RLVR</h2>
+        <p>
+          For the SFT+GRPO experiment, initialize GRPO from the merged SFT
+          model. The training objective combines output-format rewards with the
+          same tool, optional-argument, positional-argument, and exact-match
+          signals used during evaluation.
+        </p>
+        <pre
+          tabindex="0"
+        ><code class="language-bash">python src/train/grpo_kalibench.py \
+  --model-name "$PWD/outputs/models/kalibench_sft/merged" \
+  --dataset-path "$PWD/KaliBench_data/kalibench_verified_train_3504.jsonl" \
+  --subtools-path "$PWD/KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl" \
+  --mode hinted:1.0 restricted:1.0 unrestricted:1.0 \
+  --candidate-tools 20 \
+  --candidate-seed 42 \
+  --seed 3407 \
+  --output-dir "$PWD/outputs/models/kalibench_grpo" \
+  --adapter-output-dir "$PWD/outputs/adapters/kalibench_grpo" \
+  --report-to none
+</code></pre>
+        <p>
+          Each <code>--mode</code> value can include a sampling fraction in
+          <code>[0,1]</code>, such as <code>restricted:0.5</code>. The default
+          reward weights are:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Reward component</th>
+              <th align="right">Weight</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>exact output format</td>
+              <td align="right">2.0</td>
+            </tr>
+            <tr>
+              <td>approximate output format</td>
+              <td align="right">1.0</td>
+            </tr>
+            <tr>
+              <td>tool score</td>
+              <td align="right">1.0</td>
+            </tr>
+            <tr>
+              <td>optional-argument F1</td>
+              <td align="right">1.5</td>
+            </tr>
+            <tr>
+              <td>positional-argument F1</td>
+              <td align="right">1.5</td>
+            </tr>
+            <tr>
+              <td>exact match</td>
+              <td align="right">2.0</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Before launching a long run, the prepared prompts and token-length
+          statistics can be inspected without training:
+        </p>
+        <pre
+          tabindex="0"
+        ><code class="language-bash">python src/train/grpo_kalibench.py \
+  --model-name "$PWD/outputs/models/kalibench_sft/merged" \
+  --dataset-path "$PWD/KaliBench_data/kalibench_verified_train_3504.jsonl" \
+  --subtools-path "$PWD/KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl" \
+  --mode hinted:1.0 restricted:1.0 unrestricted:1.0 \
+  --debug-dataset \
+  --report-to none
+</code></pre>
+        <h2 id="3-optional-training-utilities">
+          3. Optional training utilities
+        </h2>
+        <p>
+          <code>src/train/sft_general.py</code> trains on a generic chat JSONL
+          file in which every row contains a <code>messages</code> list:
+        </p>
+        <pre
+          tabindex="0"
+        ><code class="language-json">{"messages":[{"role":"system","content":"..."},{"role":"user","content":"..."},{"role":"assistant","content":"..."}]}
+</code></pre>
+        <pre
+          tabindex="0"
+        ><code class="language-bash">python src/train/sft_general.py \
+  --model-name "$BASE_MODEL" \
+  --dataset-path "/absolute/path/to/messages.jsonl" \
+  --output-dir "$PWD/outputs/models/general_sft" \
+  --adapter-output-dir "$PWD/outputs/adapters/general_sft" \
+  --report-to none
+</code></pre>
+        <p>
+          The SFT and GRPO scripts already save a merged model. To merge or
+          export a separately saved adapter:
+        </p>
+        <pre
+          tabindex="0"
+        ><code class="language-bash">python src/train/merge_lora.py \
+  --base-model "$BASE_MODEL" \
+  --adapter "$PWD/outputs/adapters/kalibench_sft" \
+  --output-dir "$PWD/outputs/models/kalibench_sft_merged"
+</code></pre>
+        <p>
+          Continue with
+          <a href="evaluation.html">evaluation and scoring</a> after training.
+        </p>
+        <p class="guide-source">
+          Adapted from the repository’s <code>docs/training.md</code>. Commands
+          are shown for reference; this page does not run them.
+        </p>
+      </main>
+      <aside class="guide-sidebar" aria-label="On this page">
+        <h2>On this page</h2>
+        <a href="#environment-setup">Environment setup</a
+        ><a href="#1-supervised-finetuning">1. Supervised fine-tuning</a
+        ><a href="#2-grporlvr">2. GRPO/RLVR</a
+        ><a href="#3-optional-training-utilities"
+          >3. Optional training utilities</a
+        >
+      </aside>
+    </div>
+    <footer class="site-footer container">
+      <a href="../index.html">← Back to KaliBench</a
+      ><a href="https://github.com/RISys-Lab/KaliBench">Source repository</a>
+    </footer>
+  </body>
+</html>
