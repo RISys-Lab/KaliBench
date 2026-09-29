@@ -402,55 +402,6 @@ document.querySelector("#show-all").addEventListener("click", () => {
 });
 renderResults();
 
-const anatomy = {
-  tool: ["Tool selection.", " Identify the executable: ", "nmap", "."],
-  keys: [
-    "Optional keys.",
-    " The flag names are ",
-    "-sT, -p, --open",
-    ". Each key is paired with its value; flags without values map to null.",
-  ],
-  values: [
-    "Optional values.",
-    " The -p key takes ",
-    "21-25,80",
-    " as its value. The -sT and --open keys have null values because they are standalone flags.",
-  ],
-  arguments: [
-    "Positional argument.",
-    " The target host is ",
-    "192.168.1.100",
-    ". Its position is part of command correctness.",
-  ],
-};
-for (const button of document.querySelectorAll("[data-component]")) {
-  button.addEventListener("click", () => {
-    const component = button.dataset.component;
-    document.querySelectorAll("[data-component]").forEach((other) => {
-      const active = other === button;
-      other.classList.toggle("active", active);
-      other.setAttribute("aria-pressed", String(active));
-    });
-    document
-      .querySelectorAll("[data-token]")
-      .forEach((token) =>
-        token.classList.toggle(
-          "is-emphasized",
-          token.dataset.token === component,
-        ),
-      );
-    const [label, explanation, code, ending] = anatomy[component];
-    document
-      .querySelector("#anatomy-description")
-      .replaceChildren(
-        makeElement("strong", "", label),
-        document.createTextNode(explanation),
-        makeElement("code", "", code),
-        document.createTextNode(ending),
-      );
-  });
-}
-
 // Clipboard API on HTTPS/localhost, with a fallback for locally opened pages.
 async function copyText(text) {
   try {

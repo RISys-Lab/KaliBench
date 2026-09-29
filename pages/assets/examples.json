@@ -1,0 +1,1303 @@
+{
+  "phases": [
+    {
+      "id": "1",
+      "label": "Reconnaissance & Initial Access",
+      "short_label": "Reconnaissance & access"
+    },
+    {
+      "id": "2",
+      "label": "Vulnerability Analysis",
+      "short_label": "Vulnerability analysis"
+    },
+    {
+      "id": "3",
+      "label": "Exploitation & Payload Delivery",
+      "short_label": "Exploitation & delivery"
+    },
+    {
+      "id": "4",
+      "label": "Post-Exploitation & Lateral Movement",
+      "short_label": "Post-exploitation"
+    },
+    {
+      "id": "5",
+      "label": "Defensive Analysis & Reporting",
+      "short_label": "Defense & reporting"
+    }
+  ],
+  "sources": {
+    "test": {
+      "path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "sha256": "783193aaa98762ca384f028b7a7c309994c879ebf0fc1b781dcb7169fff89afc"
+    },
+    "train": {
+      "path": "KaliBench_data/kalibench_verified_train_3504.jsonl",
+      "sha256": "93dc4ddff6d9df73bed4b9e92716470e7a73df513f5ca2f1b201c85f2329f909"
+    }
+  },
+  "examples": [
+    {
+      "phase": "1",
+      "dimension": "information-gathering",
+      "dimension_label": "Information gathering",
+      "split": "test",
+      "custom_id": "sample_8052",
+      "tool_name": "nmap",
+      "query": "Scan host 192.168.1.100 using TCP Connect scan on ports 21 through 25 and 80, and display only open ports.",
+      "ground_truth_command": "nmap --open -sT -p 21-25,80 192.168.1.100",
+      "optional_args": {
+        "--open": null,
+        "-sT": null,
+        "-p": "21-25,80"
+      },
+      "positional_args": [
+        "192.168.1.100"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "nmap",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--open",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-sT",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-p",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "21-25,80",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "192.168.1.100",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "1",
+      "dimension": "802-11",
+      "dimension_label": "802.11 wireless",
+      "split": "test",
+      "custom_id": "sample_6372",
+      "tool_name": "rfkill",
+      "query": "List all wireless devices and their block status using rfkill with JSON output format.",
+      "ground_truth_command": "rfkill --json list",
+      "optional_args": {
+        "--json|-J": null
+      },
+      "positional_args": [
+        "list"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "rfkill",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--json",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "list",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "1",
+      "dimension": "rfid",
+      "dimension_label": "RFID",
+      "split": "test",
+      "custom_id": "sample_1120",
+      "tool_name": "proxmark3",
+      "query": "Connect to the Proxmark3 device on /dev/ttyACM0 and execute the command 'hf mf chk --1k', then exit without entering interactive mode.",
+      "ground_truth_command": "proxmark3 --command 'hf mf chk --1k' /dev/ttyACM0",
+      "optional_args": {
+        "--command|-c": "hf mf chk --1k"
+      },
+      "positional_args": [
+        "/dev/ttyACM0"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "proxmark3",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--command",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "'hf mf chk --1k'",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "/dev/ttyACM0",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "1",
+      "dimension": "bluetooth",
+      "dimension_label": "Bluetooth",
+      "split": "test",
+      "custom_id": "sample_4205",
+      "tool_name": "hcitool",
+      "query": "Scan for nearby Bluetooth devices using the hcitool command.",
+      "ground_truth_command": "hcitool scan",
+      "optional_args": {},
+      "positional_args": [
+        "scan"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "hcitool",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "scan",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "1",
+      "dimension": "sdr",
+      "dimension_label": "Software-defined radio",
+      "split": "test",
+      "custom_id": "sample_919",
+      "tool_name": "hackrf_transfer",
+      "query": "Use hackrf_transfer to receive data at 2.4 GHz with a sample rate of 10 MHz and save it to a file named 'capture.raw'.",
+      "ground_truth_command": "hackrf_transfer -f 2400000000 -r capture.raw -s 10000000",
+      "optional_args": {
+        "-f": "2400000000",
+        "-r": "capture.raw",
+        "-s": "10000000"
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "hackrf_transfer",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-f",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "2400000000",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-r",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "capture.raw",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-s",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "10000000",
+          "kind": "values"
+        }
+      ]
+    },
+    {
+      "phase": "1",
+      "dimension": "social-engineering",
+      "dimension_label": "Social engineering",
+      "split": "test",
+      "custom_id": "sample_420",
+      "tool_name": "setoolkit",
+      "query": "Run the tool 'setoolkit' to begin using the Social-Engineer Toolkit interface.",
+      "ground_truth_command": "setoolkit",
+      "optional_args": {},
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "setoolkit",
+          "kind": "tool"
+        }
+      ]
+    },
+    {
+      "phase": "2",
+      "dimension": "vulnerability",
+      "dimension_label": "Vulnerability analysis",
+      "split": "test",
+      "custom_id": "sample_1112",
+      "tool_name": "nuclei",
+      "query": "Scan the target example.com using Nuclei with the template directory http/cves/ and output results in JSONL format to findings.jsonl.",
+      "ground_truth_command": "nuclei --jsonl --output findings.jsonl --target example.com --templates http/cves/",
+      "optional_args": {
+        "--jsonl|-j": null,
+        "--output|-o": "findings.jsonl",
+        "--target|-u": "example.com",
+        "--templates|-t": "http/cves/"
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "nuclei",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--jsonl",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--output",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "findings.jsonl",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--target",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "example.com",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--templates",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "http/cves/",
+          "kind": "values"
+        }
+      ]
+    },
+    {
+      "phase": "2",
+      "dimension": "fuzzing",
+      "dimension_label": "Fuzzing",
+      "split": "test",
+      "custom_id": "sample_7447",
+      "tool_name": "llvm-reduce",
+      "query": "Run llvm-reduce on 'crash.ll' with the interestingness test named 'repro.sh', passing '--arg1 value1' to the test script, and limit reductions to 2 threads.",
+      "ground_truth_command": "llvm-reduce -j 2 --test repro.sh --test-arg '--arg1 value1' crash.ll",
+      "optional_args": {
+        "-j": "2",
+        "--test": "repro.sh",
+        "--test-arg": "--arg1 value1"
+      },
+      "positional_args": [
+        "crash.ll"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "llvm-reduce",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-j",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "2",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--test",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "repro.sh",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--test-arg",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "'--arg1 value1'",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "crash.ll",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "2",
+      "dimension": "web",
+      "dimension_label": "Web analysis",
+      "split": "test",
+      "custom_id": "sample_7035",
+      "tool_name": "wafw00f",
+      "query": "Analyze multiple URLs from a file named targets.csv using wafw00f and save results in JSON format to output.json.",
+      "ground_truth_command": "wafw00f --input-file targets.csv --output output.json",
+      "optional_args": {
+        "--input-file|-i": "targets.csv",
+        "--output|-o": "output.json"
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "wafw00f",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--input-file",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "targets.csv",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--output",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "output.json",
+          "kind": "values"
+        }
+      ]
+    },
+    {
+      "phase": "2",
+      "dimension": "database",
+      "dimension_label": "Database analysis",
+      "split": "test",
+      "custom_id": "sample_5864",
+      "tool_name": "sqlmap",
+      "query": "Use sqlmap to test the URL 'http://192.168.1.250/?p=1&forumaction=search' and enumerate all available databases.",
+      "ground_truth_command": "sqlmap --dbs -u 'http://192.168.1.250/?p=1&forumaction=search'",
+      "optional_args": {
+        "--dbs": null,
+        "--url|-u": "http://192.168.1.250/?p=1&forumaction=search"
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "sqlmap",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--dbs",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-u",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "'http://192.168.1.250/?p=1&forumaction=search'",
+          "kind": "values"
+        }
+      ]
+    },
+    {
+      "phase": "2",
+      "dimension": "voip",
+      "dimension_label": "VoIP",
+      "split": "test",
+      "custom_id": "sample_1147",
+      "tool_name": "rtpbreak",
+      "query": "Use rtpbreak to analyze RTP traffic from the pcap file 'capture.pcap', fill gaps in raw dumps, and save output to the directory 'rtp_output'.",
+      "ground_truth_command": "rtpbreak -d rtp_output -g -r capture.pcap",
+      "optional_args": {
+        "-d": "rtp_output",
+        "-g": null,
+        "-r": "capture.pcap"
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "rtpbreak",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-d",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "rtp_output",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-g",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-r",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "capture.pcap",
+          "kind": "values"
+        }
+      ]
+    },
+    {
+      "phase": "3",
+      "dimension": "exploitation",
+      "dimension_label": "Exploitation",
+      "split": "test",
+      "custom_id": "sample_2211",
+      "tool_name": "msf-pattern_create",
+      "query": "Generate a Metasploit pattern of length 100 using the default character sets.",
+      "ground_truth_command": "msf-pattern_create --length 100",
+      "optional_args": {
+        "--length|-l": "100"
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "msf-pattern_create",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--length",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "100",
+          "kind": "values"
+        }
+      ]
+    },
+    {
+      "phase": "3",
+      "dimension": "sniffing-spoofing",
+      "dimension_label": "Sniffing and spoofing",
+      "split": "test",
+      "custom_id": "sample_3344",
+      "tool_name": "webspy",
+      "query": "Use webspy to monitor HTTP traffic from the host 192.168.1.100 using the default network interface.",
+      "ground_truth_command": "webspy 192.168.1.100",
+      "optional_args": {},
+      "positional_args": [
+        "192.168.1.100"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "webspy",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "192.168.1.100",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "3",
+      "dimension": "hardware",
+      "dimension_label": "Hardware",
+      "split": "test",
+      "custom_id": "sample_3762",
+      "tool_name": "qemu-system-arm",
+      "query": "Launch an ARM-based QEMU instance using the 'virt' machine type, 4 CPU cores, and load the kernel 'vmlinuz' with initrd 'initrd.img'.",
+      "ground_truth_command": "qemu-system-arm -kernel vmlinuz -initrd initrd.img -machine type=virt -smp cpus=4",
+      "optional_args": {
+        "-initrd": "initrd.img",
+        "-kernel": "vmlinuz",
+        "-machine": "type=virt",
+        "-smp": "cpus=4"
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "qemu-system-arm",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-kernel",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "vmlinuz",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-initrd",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "initrd.img",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-machine",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "type=virt",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-smp",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "cpus=4",
+          "kind": "values"
+        }
+      ]
+    },
+    {
+      "phase": "3",
+      "dimension": "wireless",
+      "dimension_label": "Wireless",
+      "split": "test",
+      "custom_id": "sample_4038",
+      "tool_name": "sakis3g",
+      "query": "Use sakis3g to initiate an interactive connection session.",
+      "ground_truth_command": "sakis3g --interactive connect",
+      "optional_args": {
+        "--interactive": null
+      },
+      "positional_args": [
+        "connect"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "sakis3g",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--interactive",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "connect",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "4",
+      "dimension": "post-exploitation",
+      "dimension_label": "Post-exploitation",
+      "split": "train",
+      "custom_id": "sample_4566",
+      "tool_name": "sudo",
+      "query": "In list mode, display the privileges of user 'eve' as they would apply to the command 'cat /etc/shadow', using non-interactive mode.",
+      "ground_truth_command": "sudo --list --non-interactive -U eve cat /etc/shadow",
+      "optional_args": {
+        "--list|-l": null,
+        "--non-interactive|-n": null,
+        "--other-user|-U": "eve"
+      },
+      "positional_args": [
+        "cat",
+        "/etc/shadow"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_train_3504.jsonl",
+      "tokens": [
+        {
+          "text": "sudo",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--list",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--non-interactive",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-U",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "eve",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "cat",
+          "kind": "arguments"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "/etc/shadow",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "4",
+      "dimension": "passwords",
+      "dimension_label": "Passwords",
+      "split": "test",
+      "custom_id": "sample_4684",
+      "tool_name": "ncrack",
+      "query": "Run ncrack with maximum speed template (-T5), targeting SSH on 10.0.0.5, using usernames from users.txt and passwords from pass.txt, and stop after first successful login.",
+      "ground_truth_command": "ncrack -f -T5 -P pass.txt -U users.txt ssh://10.0.0.5",
+      "optional_args": {
+        "-f": null,
+        "-T": "5",
+        "-P": "pass.txt",
+        "-U": "users.txt"
+      },
+      "positional_args": [
+        "ssh://10.0.0.5"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "ncrack",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-f",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-T",
+          "kind": "keys"
+        },
+        {
+          "text": "5",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-P",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "pass.txt",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "-U",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "users.txt",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "ssh://10.0.0.5",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "4",
+      "dimension": "windows-resources",
+      "dimension_label": "Windows resources",
+      "split": "test",
+      "custom_id": "sample_2257",
+      "tool_name": "dnschef",
+      "query": "Start DNSChef on the loopback interface using Google's public DNS server 8.8.8.8 in full proxy mode.",
+      "ground_truth_command": "dnschef --interface 127.0.0.1 --nameserver 8.8.8.8",
+      "optional_args": {
+        "--interface": "127.0.0.1",
+        "--nameserver": "8.8.8.8"
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "dnschef",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--interface",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "127.0.0.1",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--nameserver",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "8.8.8.8",
+          "kind": "values"
+        }
+      ]
+    },
+    {
+      "phase": "4",
+      "dimension": "crypto-stego",
+      "dimension_label": "Cryptography and steganography",
+      "split": "test",
+      "custom_id": "sample_4077",
+      "dimension_short_label": "Crypto & steganography",
+      "tool_name": "ccdecrypt",
+      "query": "Using the ccdecrypt alias, decrypt 'archive.zip.cpt' with the key 'mypassword', overwriting any existing output file without prompting.",
+      "ground_truth_command": "ccdecrypt --force --key mypassword archive.zip.cpt",
+      "optional_args": {
+        "--force|-f": null,
+        "--key|-K": "mypassword"
+      },
+      "positional_args": [
+        "archive.zip.cpt"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "ccdecrypt",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--force",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--key",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "mypassword",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "archive.zip.cpt",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "5",
+      "dimension": "reverse-engineering",
+      "dimension_label": "Reverse engineering",
+      "split": "test",
+      "custom_id": "sample_3536",
+      "tool_name": "d2j-baksmali",
+      "query": "Disassemble the dex file app.dex into smali files in the directory 'output_smali', forcing overwrite if it already exists.",
+      "ground_truth_command": "d2j-baksmali --force --output output_smali app.dex",
+      "optional_args": {
+        "--force|-f": null,
+        "--output|-o": "output_smali"
+      },
+      "positional_args": [
+        "app.dex"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "d2j-baksmali",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--force",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--output",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "output_smali",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "app.dex",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "5",
+      "dimension": "forensics",
+      "dimension_label": "Forensics",
+      "split": "test",
+      "custom_id": "sample_3642",
+      "tool_name": "jadx",
+      "query": "Decompile the APK file 'app.apk' into Java source code and save the output in the directory 'output_dir', without decoding any resources.",
+      "ground_truth_command": "jadx --no-res --output-dir output_dir app.apk",
+      "optional_args": {
+        "--no-res|-r": null,
+        "--output-dir|-d": "output_dir"
+      },
+      "positional_args": [
+        "app.apk"
+      ],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "jadx",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--no-res",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--output-dir",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "output_dir",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "app.apk",
+          "kind": "arguments"
+        }
+      ]
+    },
+    {
+      "phase": "5",
+      "dimension": "reporting",
+      "dimension_label": "Reporting",
+      "split": "test",
+      "custom_id": "sample_3692",
+      "tool_name": "recordmydesktop",
+      "query": "Record my desktop with a delay of 5 seconds before starting, output the video as 'demo.ogv', and disable sound recording.",
+      "ground_truth_command": "recordmydesktop --delay 5 --no-sound --output demo.ogv",
+      "optional_args": {
+        "--delay": "5",
+        "--no-sound": null,
+        "--output|-o": "demo.ogv"
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "recordmydesktop",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--delay",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "5",
+          "kind": "values"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--no-sound",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--output",
+          "kind": "keys"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "demo.ogv",
+          "kind": "values"
+        }
+      ]
+    },
+    {
+      "phase": "5",
+      "dimension": "gpu",
+      "dimension_label": "GPU tools",
+      "split": "test",
+      "custom_id": "sample_8306",
+      "tool_name": "oclgausscrack",
+      "query": "What command would you use to get help output from oclgausscrack?",
+      "ground_truth_command": "oclgausscrack --help",
+      "optional_args": {
+        "--help|-h": null
+      },
+      "positional_args": [],
+      "source_path": "KaliBench_data/kalibench_verified_test_5000.jsonl",
+      "tokens": [
+        {
+          "text": "oclgausscrack",
+          "kind": "tool"
+        },
+        {
+          "text": " ",
+          "kind": null
+        },
+        {
+          "text": "--help",
+          "kind": "keys"
+        }
+      ]
+    }
+  ]
+}
