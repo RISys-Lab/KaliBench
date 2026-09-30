@@ -88,12 +88,12 @@ pip install torch transformers accelerate
 python demo/sft_inference.py \
   --query "In list mode, display the privileges of user 'eve' as they would apply to the command 'cat /etc/shadow', using non-interactive mode."
 python demo/grpo_inference.py \
-  --query "In list mode, display the privileges of user 'eve' as they would apply to the command 'cat /etc/shadow', using non-interactive mode."
+  --query "Use sqlmap to test the URL 'http://192.168.1.250/?p=1&forumaction=search' and enumerate all available databases."
 
 # Use the GRPO-only model:
 python demo/grpo_inference.py \
   --model RISys-Lab/RedSage-K-GRPO \
-  --query "In list mode, display the privileges of user 'eve' as they would apply to the command 'cat /etc/shadow', using non-interactive mode."
+  --query "Remove the IPv4 address 10.0.0.5 from the interface eth2 using ifconfig."
 ```
 
 Use `--model` for a Hugging Face model ID or local path. Generation options include `--max-new-tokens`, `--temperature` (0 for greedy decoding), `--top-p`, `--top-k`, and `--seed`. SFT defaults to greedy decoding with 256 new tokens; GRPO defaults to temperature 0.1 with 8,192 new tokens. Both use `--dtype bfloat16` and `--device-map auto`; for CPU inference, use `--device-map cpu --dtype float32`.
