@@ -2,18 +2,23 @@
 """Run RedSage-K SFT inference from the command line."""
 
 if __package__:
-    from .inference import build_parser, parse_args, run_inference
+    from .inference import (
+        SFT_SYSTEM_PROMPT as SYSTEM_PROMPT,
+        SFT_USER_TEMPLATE as USER_TEMPLATE,
+        build_parser, parse_args, run_inference,
+    )
 else:
-    from inference import build_parser, parse_args, run_inference
-
-
-SYSTEM_PROMPT = 'Translate the request into a single accurate Kali/Linux command. Return only <output>command</output>.'
+    from inference import (
+        SFT_SYSTEM_PROMPT as SYSTEM_PROMPT,
+        SFT_USER_TEMPLATE as USER_TEMPLATE,
+        build_parser, parse_args, run_inference,
+    )
 
 
 def build_messages(query):
     return [
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": query},
+        {"role": "user", "content": USER_TEMPLATE.format(query=query)},
     ]
 
 
