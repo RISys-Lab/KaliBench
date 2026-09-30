@@ -76,15 +76,15 @@ All three variants start from [RedSage-Qwen3-8B-Ins](https://huggingface.co/RISy
 
 ## Quick inference
 
-Try RedSage-K-SFT with Python 3.10 from the repository root:
+Try our best-performing released model, **RedSage-K-SFT-GRPO**, with Python 3.10 from the repository root:
 
 ```bash
 pip install torch transformers accelerate
-python demo/sft_inference.py \
+python demo/grpo_inference.py \
   --query "List the network interfaces using ifconfig."
 ```
 
-See the [inference guide](docs/inference.md) for GRPO models, local checkpoints, and generation options. For benchmark setup and scoring, follow the [evaluation guide](docs/evaluation.md).
+See the [inference guide](docs/inference.md) for other model variants, local checkpoints, and generation options. For benchmark setup and scoring, follow the [evaluation guide](docs/evaluation.md).
 
 ## Citation
 
