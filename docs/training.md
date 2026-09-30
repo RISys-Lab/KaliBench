@@ -1,8 +1,8 @@
 # Training
 
-[README](../README.md) · [Reference](reference.md) · [Data construction](data-construction.md) · [Training](training.md) · [Evaluation](evaluation.md)
+[README](../README.md) · [Inference](inference.md) · [Evaluation](evaluation.md) · [Training](training.md) · [Data construction](data-construction.md) · [Reference](reference.md)
 
-Complete the [environment setup](../README.md#installation), then install the training dependencies:
+Complete the [environment setup](evaluation.md#environment-setup), then install the training dependencies:
 
 ```bash
 pip install unsloth trl wandb
@@ -58,6 +58,8 @@ The default optimizer, LoRA rank, sequence length, batch size, accumulation, epo
 ## 2. GRPO/RLVR
 
 The training objective combines output-format rewards with the same tool, optional-argument, positional-argument, and exact-match signals used during evaluation.
+
+Rewards are runtime-free: generated commands are scored against reference labels without executing them. Ground-truth commands are verified through execution during [data construction](data-construction.md#3-execute-and-triage-commands-in-kali).
 
 ### SFT followed by GRPO
 

@@ -1,6 +1,6 @@
 # Data construction
 
-[README](../README.md) · [Reference](reference.md) · [Data construction](data-construction.md) · [Training](training.md) · [Evaluation](evaluation.md)
+[README](../README.md) · [Inference](inference.md) · [Evaluation](evaluation.md) · [Training](training.md) · [Data construction](data-construction.md) · [Reference](reference.md)
 
 This guide covers candidate generation, verification, and final split creation. For the released files and schemas, see the [dataset reference](reference.md#dataset-and-benchmark-splits).
 
@@ -17,7 +17,7 @@ Kali tool manuscripts
   → exact query deduplication and tool-stratified train/test finalization
 ```
 
-Complete the [environment setup](../README.md#installation-and-evaluation) first, then run all commands from the repository root. The defaults use Qwen3-Max through DashScope's OpenAI-compatible API, matching the data-construction configuration used for the released artifact. The model, API base URL, and API-key environment variable are configurable.
+Complete the [environment setup](evaluation.md#environment-setup) first, then run all commands from the repository root. The defaults use Qwen3-Max through DashScope's OpenAI-compatible API, matching the data-construction configuration used for the released artifact. The model, API base URL, and API-key environment variable are configurable.
 
 ## 1. Extract documentation and generate candidates
 
