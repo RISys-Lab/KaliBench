@@ -46,11 +46,12 @@ This is the paper's evaluation snapshot, not a continuously updated leaderboard.
 - `tools/sync-results.cjs`: dependency-free helper to refresh the static results and downloadable citation after content edits.
 - `assets/`: downloadable citation, current pipeline figure, the original `assets/logo.png` (also used as the favicon), social preview, and self-hosted fonts.
 
-If the repository, hosting URL, or dataset moves, update links in `index.html`, the BibTeX URL in both locations, and the canonical/Open Graph URLs. The dataset link currently follows the existing repository documentation: `anonymous62567/KaliBench-Verified` on Hugging Face.
+If the repository, hosting URL, or collection moves, update links in `index.html`, the BibTeX URL in both locations, and the canonical/Open Graph URLs. The dataset and model links point to the [KaliBench datasets and models collection](https://huggingface.co/collections/RISys-Lab/kalibench-datasets-and-models) on Hugging Face.
+
 
 The fonts (DM Sans and IBM Plex Mono) are bundled with their SIL Open Font License files in `assets/fonts/`. The page loads no analytics or third-party scripts.
 
-The three trained model labels are **RedSage-K (SFT+GRPO)**, **RedSage-K (SFT)**, and **RedSage-K (GRPO)**. A note below the results maps them to the paper’s original Kali-\* labels without changing any scores.
+The three trained model labels are **RedSage-K (SFT+GRPO)**, **RedSage-K (SFT)**, and **RedSage-K (GRPO)**.
 
 After editing the results in `script.js` or the inline BibTeX, run:
 
@@ -76,7 +77,7 @@ These are dataset examples, not model predictions or claims of successful execut
 
 ## Adding the public arXiv link
 
-When the public arXiv URL is available, add a Paper link beside Code and Dataset in the hero, remove `.paper-status`, and replace the noninteractive `.resource-pending` block with a linked paper resource. Update the arXiv badge and paper entry in the root README. Table and appendix citations currently remain plain text; link them to the public paper if useful. Do not restore a bundled draft PDF. The two paper asset locations are covered by `.gitignore`.
+When the public arXiv URL is available, add a Paper link beside Code and Datasets & Models in the hero, remove `.paper-status`, and replace the noninteractive `.resource-pending` block with a linked paper resource. Update the arXiv badge and paper entry in the root README. Table and appendix citations currently remain plain text; link them to the public paper if useful. Do not restore a bundled draft PDF. The two paper asset locations are covered by `.gitignore`.
 
 ## Verification
 

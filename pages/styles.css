@@ -1322,6 +1322,39 @@ a.resource-card:hover h3 {
 .resource-pending .resource-label {
   color: var(--muted);
 }
+.released-models {
+  margin-top: 48px;
+}
+.released-models > p {
+  margin: 15px 0 20px;
+  color: var(--muted);
+  font-size: 16px;
+}
+.release-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 16px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.release-table th,
+.release-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.release-table thead {
+  background: var(--tint);
+}
+.release-table tbody th {
+  font-weight: 500;
+}
+.release-table a {
+  color: var(--accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .getting-started {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
