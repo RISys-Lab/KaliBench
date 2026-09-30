@@ -21,6 +21,20 @@
 
 ---
 
+## Table of contents
+
+- [Overview](#overview)
+- [Evaluation settings](#evaluation-settings)
+- [Dataset](#dataset)
+- [Released models](#released-models)
+- [Installation](#installation)
+- [Inference examples](#inference-examples)
+- [Benchmark evaluation](#benchmark-evaluation)
+- [Training RedSage-K](#training-redsage-k)
+- [Data creation](#data-creation)
+- [Documentation](#documentation)
+- [Citation](#citation)
+
 ## Overview
 
 KaliBench evaluates natural-language-to-command translation on Kali Linux. It contains **8,504 verified query-command pairs** spanning **1,642 sub-tools** and **23 tool dimensions**. The repository includes data construction, supervised fine-tuning (SFT), reinforcement learning with verifiable rewards (GRPO/RLVR), and evaluation code.
@@ -57,9 +71,9 @@ Find the datasets and models in our [Hugging Face collection](https://huggingfac
 | [RISys-Lab/RedSage-K-GRPO](https://huggingface.co/RISys-Lab/RedSage-K-GRPO) | GRPO with verifiable rewards |
 | [RISys-Lab/RedSage-K-SFT-GRPO](https://huggingface.co/RISys-Lab/RedSage-K-SFT-GRPO) | SFT followed by GRPO |
 
-## Installation and evaluation
+<a id="installation-and-evaluation"></a>
 
-### Installation
+## Installation
 
 Run from the repository root with Python 3.10:
 
@@ -71,7 +85,7 @@ pip install -r requirements.txt
 
 Evaluation requires GPU-compatible PyTorch, CUDA, vLLM, and FlashInfer/Triton builds. Model downloads require network access unless cached. See the [training guide](docs/training.md) for additional dependencies.
 
-### Inference examples
+## Inference examples
 
 The [`demo/`](demo/) directory contains command-line inference examples using Hugging Face Transformers:
 
@@ -100,12 +114,14 @@ Use `--model` for a Hugging Face model ID or local path. Generation options incl
 
 Each script prints its generated response. Run either script with `--help` to list all options.
 
-### Evaluation
+<a id="evaluation"></a>
 
-Set `MODEL` to a local path or Hugging Face model ID:
+## Benchmark evaluation
+
+Evaluate a model on the 5,000-example held-out test split in any of the [three evaluation settings](#evaluation-settings). Set `MODEL` to a local path or Hugging Face model ID:
 
 ```bash
-export MODEL="/path/to/model"
+export MODEL="RISys-Lab/RedSage-K-SFT-GRPO"
 
 python src/evaluate.py \
   --mode hinted \
@@ -121,6 +137,33 @@ python src/evaluate.py \
 ```
 
 Outputs include predictions, per-example scores, and `<model>.hinted.summary.json`. Inference checkpoints each batch and resumes incomplete runs by default; use a separate output directory for each model/mode configuration. See the [evaluation guide](docs/evaluation.md) for runtime options, dimension scores, and result tables.
+
+## Training RedSage-K
+
+To reproduce the RedSage-K variants, start from [RISys-Lab/RedSage-Qwen3-8B-Ins](https://huggingface.co/RISys-Lab/RedSage-Qwen3-8B-Ins) and use the released [3,504-example training split](KaliBench_data/kalibench_verified_train_3504.jsonl):
+
+```bash
+export BASE_MODEL="RISys-Lab/RedSage-Qwen3-8B-Ins"
+```
+
+| Target variant | Training path | Instructions |
+| --- | --- | --- |
+| RedSage-K-SFT | Base model → KaliBench SFT | [Supervised fine-tuning](docs/training.md#1-supervised-fine-tuning) |
+| RedSage-K-GRPO | Base model → KaliBench GRPO/RLVR | [GRPO-only training](docs/training.md#grpo-only) |
+| RedSage-K-SFT-GRPO | Base model → KaliBench SFT → GRPO/RLVR | [SFT followed by GRPO](docs/training.md#sft-followed-by-grpo) |
+
+The [training guide](docs/training.md) provides dependencies, commands, reward weights, and adapter/merged-model outputs. After training, use the merged model for [inference](#inference-examples) or [benchmark evaluation](#benchmark-evaluation).
+
+## Data creation
+
+Use the released [dataset](#dataset) to train or evaluate models. To construct new query-command pairs, follow the [data construction guide](docs/data-construction.md):
+
+1. [Extract tool documentation and generate candidates](docs/data-construction.md#1-extract-documentation-and-generate-candidates).
+2. [Verify candidates against the documentation](docs/data-construction.md#2-verify-against-the-source-documentation).
+3. [Execute and triage commands in an isolated Kali environment](docs/data-construction.md#3-execute-and-triage-commands-in-kali).
+4. [Deduplicate and create the train/test splits](docs/data-construction.md#4-deduplicate-and-create-the-final-splits).
+
+See the [dataset and code reference](docs/reference.md) for JSONL schemas, coverage, and source entrypoints.
 
 ## Documentation
 

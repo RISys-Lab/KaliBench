@@ -2,7 +2,7 @@
 
 [README](../README.md) · [Reference](reference.md) · [Data construction](data-construction.md) · [Training](training.md) · [Evaluation](evaluation.md)
 
-Complete the [environment setup](../README.md#installation-and-evaluation), then install the training dependencies:
+Complete the [environment setup](../README.md#installation), then install the training dependencies:
 
 ```bash
 pip install unsloth trl wandb
@@ -10,17 +10,23 @@ pip install unsloth trl wandb
 
 Unsloth, TRL, PyTorch, and CUDA must be compatible with your GPU and driver. The examples use `--report-to none` to disable Weights & Biases logging. Run all commands from the repository root.
 
-Set the base model to a local path or a Hugging Face model ID:
+## Base model and training paths
+
+Use [RISys-Lab/RedSage-Qwen3-8B-Ins](https://huggingface.co/RISys-Lab/RedSage-Qwen3-8B-Ins) as the starting checkpoint to reproduce the RedSage-K variants:
 
 ```bash
-export BASE_MODEL="/path/to/base-model"
+export BASE_MODEL="RISys-Lab/RedSage-Qwen3-8B-Ins"
 ```
 
-The main paper-reproduction path is:
+This is also the default `--model-name` in the SFT and GRPO scripts. You can override it with another Hugging Face model ID or a local path for other experiments.
 
-```text
-constructed and verified training split → KaliBench SFT → GRPO/RLVR → merged model → evaluation
-```
+| Target variant | Starting checkpoint | Stages |
+| --- | --- | --- |
+| RedSage-K-SFT | `$BASE_MODEL` | [KaliBench SFT](#1-supervised-fine-tuning) |
+| RedSage-K-GRPO | `$BASE_MODEL` | [GRPO-only](#grpo-only) |
+| RedSage-K-SFT-GRPO | `$BASE_MODEL`, then the merged KaliBench SFT model | [SFT](#1-supervised-fine-tuning) → [GRPO](#sft-followed-by-grpo) |
+
+The commands below use the released 3,504-example training split and tool documentation explicitly. Use the held-out 5,000-example test split only for [evaluation](evaluation.md).
 
 ## 1. Supervised fine-tuning
 
@@ -51,7 +57,11 @@ The default optimizer, LoRA rank, sequence length, batch size, accumulation, epo
 
 ## 2. GRPO/RLVR
 
-For the SFT+GRPO experiment, initialize GRPO from the merged SFT model. The training objective combines output-format rewards with the same tool, optional-argument, positional-argument, and exact-match signals used during evaluation.
+The training objective combines output-format rewards with the same tool, optional-argument, positional-argument, and exact-match signals used during evaluation.
+
+### SFT followed by GRPO
+
+To train RedSage-K-SFT-GRPO, first complete [SFT](#1-supervised-fine-tuning), then initialize GRPO from its merged model:
 
 ```bash
 python src/train/grpo_kalibench.py \
@@ -67,6 +77,30 @@ python src/train/grpo_kalibench.py \
   --report-to none
 ```
 
+The merged model is saved to `outputs/models/kalibench_grpo/merged/`, and the adapter to `outputs/adapters/kalibench_grpo/`.
+
+### GRPO-only
+
+To train RedSage-K-GRPO, initialize directly from `$BASE_MODEL` without the KaliBench SFT stage. Use separate output directories for this variant:
+
+```bash
+python src/train/grpo_kalibench.py \
+  --model-name "$BASE_MODEL" \
+  --dataset-path "$PWD/KaliBench_data/kalibench_verified_train_3504.jsonl" \
+  --subtools-path "$PWD/KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl" \
+  --mode hinted:1.0 restricted:1.0 unrestricted:1.0 \
+  --candidate-tools 20 \
+  --candidate-seed 42 \
+  --seed 3407 \
+  --output-dir "$PWD/outputs/models/kalibench_grpo_only" \
+  --adapter-output-dir "$PWD/outputs/adapters/kalibench_grpo_only" \
+  --report-to none
+```
+
+The merged model is saved to `outputs/models/kalibench_grpo_only/merged/`, and the adapter to `outputs/adapters/kalibench_grpo_only/`.
+
+### Reward configuration and dataset inspection
+
 Each `--mode` value can include a sampling fraction in `[0,1]`, such as `restricted:0.5`. The default reward weights are:
 
 | Reward component | Weight |
@@ -78,7 +112,7 @@ Each `--mode` value can include a sampling fraction in `[0,1]`, such as `restric
 | positional-argument F1 | 1.5 |
 | exact match | 2.0 |
 
-Before launching a long run, the prepared prompts and token-length statistics can be inspected without training:
+Before launching a long run, the prepared prompts and token-length statistics can be inspected without training. Set `--model-name` to the checkpoint for your chosen path (`"$BASE_MODEL"` for GRPO-only):
 
 ```bash
 python src/train/grpo_kalibench.py \
