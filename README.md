@@ -9,7 +9,7 @@
 
 <p align="center">
   🌐 <a href="https://risys-lab.github.io/KaliBench/">Project Page</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  📊 <a href="https://huggingface.co/collections/RISys-Lab/kalibench-datasets-and-models">Datasets &amp; Models</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  🤗 <a href="https://huggingface.co/collections/RISys-Lab/kalibench-datasets-and-models">Datasets &amp; Models</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   📄 Paper: arXiv coming soon
 </p>
 
