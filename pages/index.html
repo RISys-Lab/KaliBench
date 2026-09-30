@@ -149,10 +149,10 @@
             >Code</a
           ><a
             class="button button-outline"
-            href="https://huggingface.co/datasets/RISys-Lab/KaliBench"
+            href="https://huggingface.co/collections/RISys-Lab/kalibench-datasets-and-models"
             ><svg class="icon" aria-hidden="true" focusable="false">
               <use href="#icon-data"></use></svg
-            >Dataset</a
+            >Datasets &amp; Models</a
           >
         </div>
         <p class="paper-status">Paper: arXiv version coming soon.</p>
@@ -1921,7 +1921,7 @@
         aria-labelledby="resources-title"
       >
         <div class="section-heading">
-          <h2 id="resources-title">Paper, data, and code</h2>
+          <h2 id="resources-title">Paper, data, models, and code</h2>
           <p class="section-intro">
             Everything needed to inspect the benchmark, train a model, or
             reproduce the evaluation.
@@ -1939,13 +1939,13 @@
           </div>
           <a
             class="resource-card"
-            href="https://huggingface.co/datasets/anonymous62567/KaliBench-Verified"
+            href="https://huggingface.co/collections/RISys-Lab/kalibench-datasets-and-models"
             ><h3>
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="#icon-data"></use></svg
-              >Dataset
+              >Datasets &amp; Models
             </h3>
-            <p>Verified examples, annotations, and train/test splits.</p>
+            <p>Verified data, train/test splits, and RedSage-K models.</p>
             <span class="resource-label"
               >Hugging Face
               <svg class="icon" aria-hidden="true" focusable="false">
@@ -1965,6 +1965,42 @@
                 <use href="#icon-arrow"></use></svg></span
           ></a>
         </div>
+        <section class="released-models" id="models" aria-labelledby="models-title">
+          <h3 id="models-title">Released models</h3>
+          <p id="model-upload-status">
+            Model uploads are in progress; files may not yet be available in
+            every repository.
+          </p>
+          <table class="release-table" aria-describedby="model-upload-status">
+            <caption class="sr-only">RedSage-K model releases on Hugging Face</caption>
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Training</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <a href="https://huggingface.co/RISys-Lab/RedSage-K-SFT">RISys-Lab/RedSage-K-SFT</a>
+                </th>
+                <td>Supervised fine-tuning (SFT)</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <a href="https://huggingface.co/RISys-Lab/RedSage-K-GRPO">RISys-Lab/RedSage-K-GRPO</a>
+                </th>
+                <td>GRPO with verifiable rewards</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <a href="https://huggingface.co/RISys-Lab/RedSage-K-SFT-GRPO">RISys-Lab/RedSage-K-SFT-GRPO</a>
+                </th>
+                <td>SFT followed by GRPO</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
         <div class="getting-started">
           <div>
             <h3>Run your own evaluation</h3>

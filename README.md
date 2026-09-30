@@ -2,14 +2,14 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/arXiv-coming%20soon-B31B1B.svg" alt="arXiv: coming soon">
-  <a href="https://huggingface.co/datasets/RISys-Lab/KaliBench"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-KaliBench-orange" alt="Hugging Face: KaliBench"></a>
+  <a href="https://huggingface.co/collections/RISys-Lab/kalibench-datasets-and-models"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-KaliBench-orange" alt="Hugging Face: KaliBench datasets and models"></a>
   <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python: 3.10+">
   <img src="https://img.shields.io/badge/Framework-PyTorch-ee4c2c" alt="Framework: PyTorch">
 </p>
 
 <p align="center">
   🌐 <a href="https://risys-lab.github.io/KaliBench/">Project Page</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  📊 <a href="https://huggingface.co/datasets/RISys-Lab/KaliBench">Dataset</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  📊 <a href="https://huggingface.co/collections/RISys-Lab/kalibench-datasets-and-models">Datasets &amp; Models</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   📄 Paper: arXiv coming soon
 </p>
 
@@ -17,8 +17,7 @@
 
 **Authors:** Pengfei Li<sup>1,∗</sup>, Naufal Suryanto<sup>1,∗</sup>, Sicheng Zhang<sup>1</sup>, Muzammal Naseer<sup>1,2</sup>
 
-<sup>1</sup> Khalifa University · <sup>2</sup> University of Western Australia<br>
-<sup>∗</sup> Equal contribution
+<sup>1</sup> Khalifa University · <sup>2</sup> University of Western Australia · <sup>∗</sup> Equal contribution
 
 ---
 
@@ -48,6 +47,16 @@ Metrics include tool selection, optional-argument F1, positional-argument F1, to
 
 See the [dataset reference](docs/reference.md#dataset-and-benchmark-splits) for schemas, examples, and coverage.
 
+## Released models
+
+Find the datasets and models in our [Hugging Face collection](https://huggingface.co/collections/RISys-Lab/kalibench-datasets-and-models).
+
+| Model | Training |
+| --- | --- |
+| [RISys-Lab/RedSage-K-SFT](https://huggingface.co/RISys-Lab/RedSage-K-SFT) | Supervised fine-tuning (SFT) |
+| [RISys-Lab/RedSage-K-GRPO](https://huggingface.co/RISys-Lab/RedSage-K-GRPO) | GRPO with verifiable rewards |
+| [RISys-Lab/RedSage-K-SFT-GRPO](https://huggingface.co/RISys-Lab/RedSage-K-SFT-GRPO) | SFT followed by GRPO |
+
 ## Installation and evaluation
 
 ### Installation
@@ -61,6 +70,35 @@ pip install -r requirements.txt
 ```
 
 Evaluation requires GPU-compatible PyTorch, CUDA, vLLM, and FlashInfer/Triton builds. Model downloads require network access unless cached. See the [training guide](docs/training.md) for additional dependencies.
+
+### Inference examples
+
+The [`demo/`](demo/) directory contains command-line inference examples using Hugging Face Transformers:
+
+| Example | Model |
+| --- | --- |
+| [SFT inference](demo/sft_inference.py) | `RISys-Lab/RedSage-K-SFT` |
+| [GRPO inference](demo/grpo_inference.py) | `RISys-Lab/RedSage-K-SFT-GRPO` (default), or `RISys-Lab/RedSage-K-GRPO` |
+
+Install the demo dependencies, then run from the repository root:
+
+```bash
+pip install torch transformers accelerate
+
+python demo/sft_inference.py \
+  --query "In list mode, display the privileges of user 'eve' as they would apply to the command 'cat /etc/shadow', using non-interactive mode."
+python demo/grpo_inference.py \
+  --query "In list mode, display the privileges of user 'eve' as they would apply to the command 'cat /etc/shadow', using non-interactive mode."
+
+# Use the GRPO-only model:
+python demo/grpo_inference.py \
+  --model RISys-Lab/RedSage-K-GRPO \
+  --query "In list mode, display the privileges of user 'eve' as they would apply to the command 'cat /etc/shadow', using non-interactive mode."
+```
+
+Use `--model` for a Hugging Face model ID or local path. Generation options include `--max-new-tokens`, `--temperature` (0 for greedy decoding), `--top-p`, `--top-k`, and `--seed`. SFT defaults to greedy decoding with 256 new tokens; GRPO defaults to temperature 0.1 with 8,192 new tokens. Both use `--dtype bfloat16` and `--device-map auto`; for CPU inference, use `--device-map cpu --dtype float32`.
+
+Each script prints its generated response. Run either script with `--help` to list all options.
 
 ### Evaluation
 
