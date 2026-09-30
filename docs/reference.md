@@ -1,6 +1,6 @@
 # Dataset and code reference
 
-[README](../README.md) · [Reference](reference.md) · [Data construction](data-construction.md) · [Training](training.md) · [Evaluation](evaluation.md)
+[README](../README.md) · [Inference](inference.md) · [Evaluation](evaluation.md) · [Training](training.md) · [Data construction](data-construction.md) · [Reference](reference.md)
 
 ## Dataset and benchmark splits
 

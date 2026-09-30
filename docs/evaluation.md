@@ -1,10 +1,32 @@
 # Evaluation and scoring
 
-[README](../README.md) · [Reference](reference.md) · [Data construction](data-construction.md) · [Training](training.md) · [Evaluation](evaluation.md)
+[README](../README.md) · [Inference](inference.md) · [Evaluation](evaluation.md) · [Training](training.md) · [Data construction](data-construction.md) · [Reference](reference.md)
 
-Complete the [environment setup](../README.md#installation-and-evaluation) and run all commands from the repository root. The examples use the merged model from the [training guide](training.md); replace `--model` with another local model path or Hugging Face model ID as needed.
+Evaluate a model under KaliBench's [three benchmark settings](../README.md#benchmark-settings). Run all commands from the repository root.
 
 `src/evaluate.py` builds prompts and labels, runs vLLM inference, checkpoints predictions, and calculates tool, optional F1, positional F1, total, exact-match, and format-error metrics. Scoring across the 23 Kali tool dimensions is optional.
+
+## Environment setup
+
+Create a Python 3.10 environment and install the repository dependencies:
+
+```bash
+conda create -n kalibench python=3.10
+conda activate kalibench
+pip install -r requirements.txt
+```
+
+Evaluation requires GPU-compatible PyTorch, CUDA, vLLM, and FlashInfer/Triton builds. Model downloads require network access unless cached. For training, install the [additional training dependencies](training.md).
+
+## Select a model
+
+The examples use the released RedSage-K-SFT-GRPO model:
+
+```bash
+export MODEL="RISys-Lab/RedSage-K-SFT-GRPO"
+```
+
+To evaluate another model, set `MODEL` to its Hugging Face ID or local path. For your own training run, use the merged checkpoint (for example, `"$PWD/outputs/models/kalibench_grpo/merged"`).
 
 Use a different output directory for every model/mode pair. This prevents a resumed run from mixing predictions generated with different prompts.
 
@@ -15,7 +37,7 @@ python src/evaluate.py \
   --mode hinted \
   --input "$PWD/KaliBench_data/kalibench_verified_test_5000.jsonl" \
   --subtools "$PWD/KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl" \
-  --model "$PWD/outputs/models/kalibench_grpo/merged" \
+  --model "$MODEL" \
   --output-dir "$PWD/outputs/evaluate/kalibench_grpo/hinted" \
   --candidate-seed 42 \
   --seed 3407 \
@@ -34,7 +56,7 @@ for MODE in unrestricted restricted hinted; do
     --mode "$MODE" \
     --input "$PWD/KaliBench_data/kalibench_verified_test_5000.jsonl" \
     --subtools "$PWD/KaliBench_data/Kali_Tool_Subtools_UsageCode.jsonl" \
-    --model "$PWD/outputs/models/kalibench_grpo/merged" \
+    --model "$MODEL" \
     --output-dir "$PWD/outputs/evaluate/kalibench_grpo/$MODE" \
     --candidate-tools 20 \
     --candidate-seed 42 \
