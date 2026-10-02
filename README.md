@@ -8,7 +8,7 @@
 <p align="center">
   🌐 <a href="https://risys-lab.github.io/KaliBench/">Project Page</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   🤗 <a href="https://huggingface.co/collections/RISys-Lab/kalibench-datasets-and-models">Datasets &amp; Models</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  📄 Paper: arXiv coming soon
+  📄 <a href="https://arxiv.org/abs/2610.02206">arXiv</a>
 </p>
 
 **Official repository for "KaliBench: A Fine-Grained Benchmark for Cybersecurity Tool Use on Kali Linux with Runtime-Free Verifiable Rewards" (NeurIPS 2026).**
